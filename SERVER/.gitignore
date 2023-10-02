@@ -1,6 +1,6 @@
 
 # secret files
-# .env
+.env
 
 # Miscellaneous files
 __pycache__
