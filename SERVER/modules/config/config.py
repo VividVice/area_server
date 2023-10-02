@@ -36,7 +36,7 @@ class Config():
 
     def Run(self) -> None:
         """Run the Flask app."""
-        self.app.run(debug=True)
+        self.app.run(host = '172.31.16.135', debug=True, port=5000)
 
     def AddResource(self, resource, route) -> None:
         """Add a resource to the Flask-RESTPlus API.
