@@ -1,0 +1,12 @@
+
+# secret files
+.env
+
+# Miscellaneous files
+__pycache__
+
+# Database
+*.db
+
+# IDE
+.vscode
