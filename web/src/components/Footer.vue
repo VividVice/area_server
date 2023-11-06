@@ -23,7 +23,7 @@
           const a = document.createElement('a');
           a.style.display = 'none';
           a.href = url;
-          a.download = 'client.apk'; // You might want to change this to 'w.apk' to reflect the server's file name
+          a.download = 'AreaCraft.apk'; // You might want to change this to 'w.apk' to reflect the server's file name
           document.body.appendChild(a);
           a.click();
           window.URL.revokeObjectURL(url);
