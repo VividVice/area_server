@@ -1,7 +1,8 @@
 from passlib.hash import pbkdf2_sha256
 from os import getenv
-from random import randbytes, seed, random
+import random
 import string
+
 def hash_password(password) -> str:
     """Hash a password for storing."""
     return pbkdf2_sha256.hash(password)
@@ -18,7 +19,7 @@ def generate_username(invalid_usernames:set, len =10, seed_val=0) -> str:
 
     """Generate a unique username"""
     if seed_val != 0:
-        seed(seed_val)
+        random.seed(seed_val)
     username = random_string(len)
     if username in invalid_usernames:
         return generate_username(invalid_usernames, len, seed_val+1)
