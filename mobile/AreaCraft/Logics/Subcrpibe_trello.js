@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { WebView } from "react-native-webview";
 import axios from "axios";
-import ServerUrl from "./BaseUrl";
+import {ServerUrl} from "../ServerUrl";
 import { View, Text } from "react-native";
 
 // Ways to set up a service as POST request to /subscribe. expect a redirect url or an error response

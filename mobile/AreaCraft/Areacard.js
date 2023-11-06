@@ -9,10 +9,9 @@ import {
   Switch,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import ServerUrl from "./Logics/BaseUrl";
+import { ServerUrl } from "./Logics/BaseUrl";
 import TrelloSubscribe from "./Logics/Subcrpibe_trello";
 import axios from "axios";
-
 
 export default function AreaCard({ image1, image2, description, token }) {
   const [isEnabled, setIsEnabled] = useState(false);
