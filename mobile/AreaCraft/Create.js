@@ -250,23 +250,25 @@ export default function CreateComponent() {
       }
       if (selectedItemApp2 === "Delete List") {
         body.reaction_params = {
-          id: Option1app2,
+          board_name: Option1app2,
+          list_name: Option2app2,
         };
       }
       if (selectedItemApp2 === "Delete Card") {
         body.reaction_params = {
-          id: Option1app2,
-        };
-      }
-      if (selectedItemApp2 === "Create Member") {
-        body.reaction_params = {
-          name: Option1app2,
-          email: Option2app2,
+          board_name: Option1app2,
+          card_name: Option2app2,
         };
       }
       if (selectedItemApp2 === "Delete Member") {
         body.reaction_params = {
           board_name: Option1app2,
+          email: Option2app2,
+        };
+      }
+      if (selectedItemApp2 === "Create Member") {
+        body.reaction_params = {
+          name: Option1app2,
           email: Option2app2,
         };
       }
@@ -807,26 +809,40 @@ export default function CreateComponent() {
                       </>
                     )}
                     {selectedItemApp2 === "Delete List" && (
-                      <>
+                      <View style={styles.inputTextCallr}>
                         <TextInput
                           style={styles.input}
-                          placeholder="List name"
+                          placeholder="name of the board"
                           placeholderTextColor="#909090"
                           value={Option1app2}
                           onChangeText={setOption1app2}
                         />
-                      </>
+                        <TextInput
+                          style={styles.input}
+                          placeholder="name of the list"
+                          placeholderTextColor="#909090"
+                          value={Option2app2}
+                          onChangeText={setOption2app2}
+                        />
+                      </View>
                     )}
                     {selectedItemApp2 === "Delete Card" && (
-                      <>
+                      <View style={styles.inputTextCallr}>
                         <TextInput
                           style={styles.input}
-                          placeholder="Card name"
+                          placeholder="name of the board"
                           placeholderTextColor="#909090"
                           value={Option1app2}
                           onChangeText={setOption1app2}
                         />
-                      </>
+                        <TextInput
+                          style={styles.input}
+                          placeholder="name of the card"
+                          placeholderTextColor="#909090"
+                          value={Option2app2}
+                          onChangeText={setOption2app2}
+                        />
+                      </View>
                     )}
                     {selectedItemApp2 === "Delete Member" && (
                       <View style={styles.inputTextCallr}>
@@ -1056,39 +1072,39 @@ export default function CreateComponent() {
                         />
                       </View>
                     )}
-                    {selectedItemApp1 === "Get current time" && (
+                    {selectedItemApp2 === "Get current time" && (
                       <View style={styles.inputTextCallr}>
                         <TextInput
                           style={styles.input}
                           placeholder="Target number (ex: +33612345678)"
                           placeholderTextColor="#909090"
-                          value={Option1app1}
-                          onChangeText={setOption1app1}
+                          value={Option1app2}
+                          onChangeText={setOption1app2}
                         />
                         <TextInput
                           style={styles.input}
                           placeholder="City (ex: Paris)"
                           placeholderTextColor="#909090"
-                          value={Option2app1}
-                          onChangeText={setOption2app1}
+                          value={Option2app2}
+                          onChangeText={setOption2app2}
                         />
                       </View>
                     )}
-                    {selectedItemApp1 === "Get current weather" && (
+                    {selectedItemApp2 === "Get current weather" && (
                       <View style={styles.inputTextCallr}>
                         <TextInput
                           style={styles.input}
                           placeholder="Target number (ex: +33612345678)"
                           placeholderTextColor="#909090"
-                          value={Option1app1}
-                          onChangeText={setOption1app1}
+                          value={Option1app2}
+                          onChangeText={setOption1app2}
                         />
                         <TextInput
                           style={styles.input}
                           placeholder="Continent/City (ex: Europe/Paris)"
                           placeholderTextColor="#909090"
-                          value={Option2app1}
-                          onChangeText={setOption2app1}
+                          value={Option2app2}
+                          onChangeText={setOption2app2}
                         />
                       </View>
                     )}
