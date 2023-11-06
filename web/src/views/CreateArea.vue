@@ -671,25 +671,25 @@ export default {
         if (this.selectedReaction === 'Post Message Sentiments') {
           reaction_p = {
             target: this.Option1app2,
-            msg: this.Option2app2,
+            message_content: this.Option2app2,
           };
         }
         if (this.selectedReaction === 'Post Message Categories') {
           reaction_p = {
             target: this.Option1app2,
-            msg: this.Option2app2,
+            message_content: this.Option2app2,
           };
         }
         if (this.selectedReaction === 'Post Message Summarize') {
           reaction_p = {
             target: this.Option1app2,
-            msg: this.Option2app2,
+            message_content: this.Option2app2,
           };
         }
         if (this.selectedReaction === 'Post Message Mail') {
           reaction_p = {
             target: this.Option1app2,
-            msg: this.Option2app2,
+            message_content: this.Option2app2,
           };
         }
       }

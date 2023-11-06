@@ -49,9 +49,6 @@ export default function CreateComponent() {
     if (selectedApp1 === "Callr") {
       return;
     }
-    // if (selectedApp1 === 'Spotify') {
-    //   navigation.navigate('SpotifySub', { token: token, return_destination: "Create" });
-    // }
     setIsConnectedToApp1(true);
   }
 
@@ -72,9 +69,6 @@ export default function CreateComponent() {
         return_destination: "Create",
       });
     }
-    // if (selectedApp2 === 'Spotify') {
-    //   navigation.navigate('SpotifySub', { token: token, return_destination: "Create" });
-    // }
     setIsConnectedToApp2(true);
   }
 
@@ -191,25 +185,45 @@ export default function CreateComponent() {
     }
   }
 
+  function handleOption1app1(app) {
+    if (selectedApp1 === "Callr") {
+      if (app === "Call outbound hangup") {
+        return "call.outbound_hangup";
+      } else if (app === "Call inbound start") {
+        return "call.inbound_start";
+      } else if (app === "Call outbound start") {
+        return "call.outbound_start";
+      } else if (app === "Media recording") {
+        return "media.recording.new";
+      } else if (app === "Call inbound hangup") {
+        return "call.inbound_hangup";
+      } else if (app === "Billing credit") {
+        return "billing.credit";
+      } else if (app === "Send sms") {
+        return "sms.mo";
+      } else if (app === "Did assigned") {
+        return "did.assigned";
+      } else if (app === "Did unassigned") {
+        return "did.unassigned";
+      } else {
+        return toCamelCase(app);
+      }
+    } else {
+      return toCamelCase(app);
+    }
+  }
+
   async function handleTryIt() {
     body = {
       action_service: toCamelCase(selectedApp1),
-      action_name: toCamelCase(selectedItemApp1),
+      action_name: handleOption1app1(selectedItemApp1),
       reaction_service: toCamelCase(selectedApp2),
       reaction_name: toCamelCase(selectedItemApp2),
     };
 
     body.action_params = {};
-    if (selectedApp1 === "Time") {
-      if (selectedItemApp1 === "Create timer") {
-        body.action_params = {
-          hour: Option1app1,
-          minute: Option2app1,
-        };
-      }
-    }
-
     body.reaction_params = {};
+
     if (selectedApp2 === "Trello") {
       if (selectedItemApp2 === "Create Card") {
         body.reaction_params = {
@@ -278,6 +292,7 @@ export default function CreateComponent() {
       }
     }
 
+
     if (selectedApp2 === "Callr") {
       if (selectedItemApp2 === "Make call") {
         body.reaction_params = {
@@ -305,6 +320,7 @@ export default function CreateComponent() {
       }
     }
 
+
     if (selectedApp2 === "ChatGPT") {
       if (selectedItemApp2 === "Post message sentiments") {
         body.reaction_params = {
@@ -328,6 +344,26 @@ export default function CreateComponent() {
         body.reaction_params = {
           target: Option1app2,
           message_content: Option2app2,
+        };
+      }
+    }
+
+
+    if (selectedApp2 === "Time") {
+      if (selectedItemApp2 === "Get current time") {
+        body.reaction_params = {
+          target: Option1app2,
+          city: Option2app2,
+        };
+      }
+    }
+
+
+    if (selectedApp2 === "Weather") {
+      if (selectedItemApp2 === "Get current weather") {
+        body.reaction_params = {
+          target: Option1app2,
+          city: Option2app2,
         };
       }
     }
@@ -372,10 +408,7 @@ export default function CreateComponent() {
         >
           <Picker.Item label="Select app" value="" />
           <Picker.Item label="Trello" value="Trello" />
-          <Picker.Item label="Spotify" value="Spotify" />
           <Picker.Item label="Callr" value="Callr" />
-          <Picker.Item label="Time" value="Time" />
-          <Picker.Item label="Meteo" value="Meteo" />
         </Picker>
       </View>
       <Text style={styles.slogan}>...With this one:</Text>
@@ -387,11 +420,11 @@ export default function CreateComponent() {
         >
           <Picker.Item label="Select app" value="" />
           <Picker.Item label="Trello" value="Trello" />
-          <Picker.Item label="Spotify" value="Spotify" />
           <Picker.Item label="ChatGPT" value="ChatGPT" />
           <Picker.Item label="Callr" value="Callr" />
-          <Picker.Item label="GitHub" value="GitHub" />
+          {/* <Picker.Item label="GitHub" value="GitHub" /> */}
           <Picker.Item label="Time" value="Time" />
+          <Picker.Item label="Weather" value="Weather" />
         </Picker>
       </View>
 
@@ -522,54 +555,6 @@ export default function CreateComponent() {
                     </Picker>
                   </>
                 )}
-                {selectedApp1 === "Spotify" && (
-                  <>
-                    <Picker
-                      style={styles.picker}
-                      selectedValue={selectedItemApp1}
-                      onValueChange={(itemValue) =>
-                        setSelectedItemApp1(itemValue)
-                      }
-                    >
-                      <Picker.Item label="New Playlist" value="New Playlist" />
-                      <Picker.Item
-                        label="New Saved Track"
-                        value="New Saved Track"
-                      />
-                      <Picker.Item
-                        label="New Track Added To Playlist"
-                        value="New Track Added To Playlist"
-                      />
-                    </Picker>
-                  </>
-                )}
-                {selectedApp1 === "Time" && (
-                  <>
-                    <Picker
-                      style={styles.picker}
-                      selectedValue={selectedItemApp1}
-                      onValueChange={(itemValue) =>
-                        setSelectedItemApp1(itemValue)
-                      }
-                    >
-                      <Picker.Item label="Create timer" value="Create timer" />
-                    </Picker>
-                  </>
-                )}
-                {selectedApp1 === "Meteo" && (
-                  <>
-                    <Picker
-                      style={styles.picker}
-                      selectedValue={selectedItemApp1}
-                      onValueChange={(itemValue) =>
-                        setSelectedItemApp1(itemValue)
-                      }
-                    >
-                      <Picker.Item label="meteo change" value="meteo change" />
-                      <Picker.Item label="temperature" value="temperature" />
-                    </Picker>
-                  </>
-                )}
                 {selectedApp1 === "Callr" && (
                   <>
                     <Picker
@@ -644,24 +629,6 @@ export default function CreateComponent() {
                     </Picker>
                   </>
                 )}
-                {selectedApp2 === "Spotify" && (
-                  <>
-                    <Picker
-                      style={styles.picker}
-                      selectedValue={selectedItemApp2}
-                      onValueChange={(itemValue) =>
-                        setSelectedItemApp2(itemValue)
-                      }
-                    >
-                      <Picker.Item
-                        label="Create Playlist"
-                        value="Create Playlist"
-                      />
-                      <Picker.Item label="Find Track" value="Find Track" />
-                      <Picker.Item label="Save Track" value="Save Track" />
-                    </Picker>
-                  </>
-                )}
                 {selectedApp2 === "ChatGPT" && (
                   <>
                     <Picker
@@ -686,26 +653,6 @@ export default function CreateComponent() {
                       <Picker.Item
                         label="Post message mail"
                         value="Post message mail"
-                      />
-                    </Picker>
-                  </>
-                )}
-                {selectedApp2 === "GitHub" && (
-                  <>
-                    <Picker
-                      style={styles.picker}
-                      selectedValue={selectedItemApp2}
-                      onValueChange={(itemValue) =>
-                        setSelectedItemApp2(itemValue)
-                      }
-                    >
-                      <Picker.Item
-                        label="Add repository"
-                        value="Add repository"
-                      />
-                      <Picker.Item
-                        label="Remove repository"
-                        value="Remove repository"
                       />
                     </Picker>
                   </>
@@ -746,7 +693,20 @@ export default function CreateComponent() {
                         setSelectedItemApp2(itemValue)
                       }
                     >
-                      <Picker.Item label="Global clock" value="Global clock" />
+                      <Picker.Item label="Get current time" value="Get current time" />
+                    </Picker>
+                  </>
+                )}
+                {selectedApp2 === "Weather" && (
+                  <>
+                    <Picker
+                      style={styles.picker}
+                      selectedValue={selectedItemApp2}
+                      onValueChange={(itemValue) =>
+                        setSelectedItemApp2(itemValue)
+                      }
+                    >
+                      <Picker.Item label="Get current weather" value="Get current weather" />
                     </Picker>
                   </>
                 )}
@@ -756,46 +716,6 @@ export default function CreateComponent() {
               <View style={styles.inputContainer}>
                 {selectedItemApp1 && selectedItemApp2 && (
                   <>
-                    {selectedItemApp1 === "Create timer" && (
-                      <View style={styles.inputTextCallr}>
-                        <TextInput
-                          style={styles.input}
-                          placeholder="Time in hour"
-                          placeholderTextColor="#909090"
-                          value={Option1app1}
-                          onChangeText={setOption1app1}
-                        />
-                        <TextInput
-                          style={styles.input}
-                          placeholder="Time in minutes"
-                          placeholderTextColor="#909090"
-                          value={Option2app1}
-                          onChangeText={setOption2app1}
-                        />
-                      </View>
-                    )}
-                    {selectedItemApp1 === "meteo change" && (
-                      <>
-                        <TextInput
-                          style={styles.input}
-                          placeholder="City"
-                          placeholderTextColor="#909090"
-                          value={Option1app1}
-                          onChangeText={setOption1app1}
-                        />
-                      </>
-                    )}
-                    {selectedItemApp1 === "temperature" && (
-                      <>
-                        <TextInput
-                          style={styles.input}
-                          placeholder="City"
-                          placeholderTextColor="#909090"
-                          value={Option1app1}
-                          onChangeText={setOption1app1}
-                        />
-                      </>
-                    )}
                   </>
                 )}
               </View>
@@ -861,7 +781,7 @@ export default function CreateComponent() {
                       <View style={styles.inputTextCallr}>
                         <TextInput
                           style={styles.input}
-                          placeholder="Member id"
+                          placeholder="email of the member"
                           placeholderTextColor="#909090"
                           value={Option1app2}
                           onChangeText={setOption1app2}
@@ -890,7 +810,7 @@ export default function CreateComponent() {
                       <>
                         <TextInput
                           style={styles.input}
-                          placeholder="List id"
+                          placeholder="List name"
                           placeholderTextColor="#909090"
                           value={Option1app2}
                           onChangeText={setOption1app2}
@@ -901,7 +821,7 @@ export default function CreateComponent() {
                       <>
                         <TextInput
                           style={styles.input}
-                          placeholder="Card id"
+                          placeholder="Card name"
                           placeholderTextColor="#909090"
                           value={Option1app2}
                           onChangeText={setOption1app2}
@@ -930,14 +850,14 @@ export default function CreateComponent() {
                       <View style={styles.inputTextCallr}>
                         <TextInput
                           style={styles.input}
-                          placeholder="id"
+                          placeholder="board name"
                           placeholderTextColor="#909090"
                           value={Option1app2}
                           onChangeText={setOption1app2}
                         />
                         <TextInput
                           style={styles.input}
-                          placeholder="name"
+                          placeholder="new board name"
                           placeholderTextColor="#909090"
                           value={Option2app2}
                           onChangeText={setOption2app2}
@@ -993,39 +913,6 @@ export default function CreateComponent() {
                           onChangeText={setOption3app2}
                         />
                       </View>
-                    )}
-                    {selectedItemApp2 === "Create Playlist" && (
-                      <>
-                        <TextInput
-                          style={styles.input}
-                          placeholder="Playlist name"
-                          placeholderTextColor="#909090"
-                          value={Option1app2}
-                          onChangeText={setOption1app2}
-                        />
-                      </>
-                    )}
-                    {selectedItemApp2 === "Find Track" && (
-                      <>
-                        <TextInput
-                          style={styles.input}
-                          placeholder="Track name"
-                          placeholderTextColor="#909090"
-                          value={Option1app2}
-                          onChangeText={setOption1app2}
-                        />
-                      </>
-                    )}
-                    {selectedItemApp2 === "Save Track" && (
-                      <>
-                        <TextInput
-                          style={styles.input}
-                          placeholder="Track name"
-                          placeholderTextColor="#909090"
-                          value={Option1app2}
-                          onChangeText={setOption1app2}
-                        />
-                      </>
                     )}
                     {selectedItemApp2 === "Post message sentiments" && (
                       <View style={styles.inputTextCallr}>
@@ -1099,28 +986,6 @@ export default function CreateComponent() {
                         />
                       </View>
                     )}
-                    {selectedItemApp2 === "Add repository" && (
-                      <>
-                        <TextInput
-                          style={styles.input}
-                          placeholder="Repo name"
-                          placeholderTextColor="#909090"
-                          value={Option1app2}
-                          onChangeText={setOption1app2}
-                        />
-                      </>
-                    )}
-                    {selectedItemApp2 === "Remove repository" && (
-                      <>
-                        <TextInput
-                          style={styles.input}
-                          placeholder="Repo name"
-                          placeholderTextColor="#909090"
-                          value={Option1app2}
-                          onChangeText={setOption1app2}
-                        />
-                      </>
-                    )}
                     {selectedItemApp2 === "Send sms" && (
                       <View style={styles.inputTextCallr}>
                         <TextInput
@@ -1188,6 +1053,42 @@ export default function CreateComponent() {
                           placeholderTextColor="#909090"
                           value={Option2app2}
                           onChangeText={setOption2app2}
+                        />
+                      </View>
+                    )}
+                    {selectedItemApp1 === "Get current time" && (
+                      <View style={styles.inputTextCallr}>
+                        <TextInput
+                          style={styles.input}
+                          placeholder="Target number (ex: +33612345678)"
+                          placeholderTextColor="#909090"
+                          value={Option1app1}
+                          onChangeText={setOption1app1}
+                        />
+                        <TextInput
+                          style={styles.input}
+                          placeholder="City (ex: Paris)"
+                          placeholderTextColor="#909090"
+                          value={Option2app1}
+                          onChangeText={setOption2app1}
+                        />
+                      </View>
+                    )}
+                    {selectedItemApp1 === "Get current weather" && (
+                      <View style={styles.inputTextCallr}>
+                        <TextInput
+                          style={styles.input}
+                          placeholder="Target number (ex: +33612345678)"
+                          placeholderTextColor="#909090"
+                          value={Option1app1}
+                          onChangeText={setOption1app1}
+                        />
+                        <TextInput
+                          style={styles.input}
+                          placeholder="Continent/City (ex: Europe/Paris)"
+                          placeholderTextColor="#909090"
+                          value={Option2app1}
+                          onChangeText={setOption2app1}
                         />
                       </View>
                     )}
