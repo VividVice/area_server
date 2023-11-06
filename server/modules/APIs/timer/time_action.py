@@ -26,8 +26,8 @@ from dotenv import load_dotenv
 #         print(f"Erreur lors de la récupération de l'heure : {e}")
 
 # Reactions
-def get_current_time(user: UserModel, target, city_name):
-    url = f'http://worldtimeapi.org/api/timezone/{city_name}'
+def get_current_time(user: UserModel, target, city):
+    url = f'http://worldtimeapi.org/api/timezone/{city}'
 
     try:
         response = requests.get(url)
@@ -35,7 +35,7 @@ def get_current_time(user: UserModel, target, city_name):
         result = ""
         current_time = data['datetime']
         current_time = current_time.split('T')[1]
-        result += f"L'heure actuelle à {city_name} est : {current_time}"
+        result += f"L'heure actuelle à {city} est : {current_time}"
 
         api = callr.Api(getenv("CALLR_LOGIN"), getenv("CALLR_PASSWORD"))
 
