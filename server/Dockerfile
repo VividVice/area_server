@@ -12,8 +12,8 @@ RUN pip install -r requirements.txt
 # Copy the current directory contents into the container at /app
 COPY . .
 
-# Make port 8080 available to the world outside this container
-EXPOSE 8080
+# Make port 80 available to the world outside this container
+EXPOSE 80
 
 # Define environment variable for Flask to run in production mode
 ENV FLASK_ENV=production

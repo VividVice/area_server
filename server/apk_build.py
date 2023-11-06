@@ -6,5 +6,5 @@ app = Config().GetApp()
 
 @app.route('/client.apk', methods=['GET'])
 def download_apk():
-    return send_from_directory('./build', 'w.apk')
+    return send_from_directory('./build/', 'client.apk')
 

@@ -10,6 +10,7 @@ from modules.APIs.trello.TrelloWebhook import WebHookTrello, get_endpoint as tre
 from modules.endpoints.reaction_sub import Area_Sub
 from modules.APIs.callr import Callr_Webhook
 import apk_build
+import get_areas
 from modules.APIs.callr.Callr_Webhook import  WebHookCallr, get_endpoint as callr_endpoint
 # from apscheduler.schedulers.background import BackgroundScheduler
 # from trello import Trello, ChatGPT
