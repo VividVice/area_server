@@ -167,6 +167,14 @@ export default {
   font-size: 14px;
 }
 
+.rememberMe {
+  margin-bottom: 15px;
+  font-family: 'Quicksand_Light', serif;
+  margin-left: 20%;
+  margin-right: 20%;
+  font-size: 16px;
+}
+
 button {
   padding: 10px 20px;
   background-color: var(--color-complementary-1);
