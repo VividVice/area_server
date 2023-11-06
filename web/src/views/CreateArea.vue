@@ -244,15 +244,15 @@
 
           <div v-else-if="selectedApp2 === 'Trello' && selectedReaction === 'Create Member'">
             <h2 class="nameOfParam">Member Name</h2>
-            <p v-if="showTargetInfoReaction">Insert the name of the member</p>
             <p v-if="showMessageInfoReaction">Insert the name of the board</p>
-            <div class="input-container2">
-              <button class="infoBtn" @click="showTargetInfoReaction = !showTargetInfoReaction">i</button>
-              <input v-model="Option1app2" type="text" placeholder="Member id">
-            </div>
+            <p v-if="showTargetInfoReaction">Insert the email of the member</p>
             <div class="input-container2">
               <button class="infoBtn" @click="showMessageInfoReaction = !showMessageInfoReaction">i</button>
-              <input v-model="Option2app2" type="text" placeholder="Board name">
+              <input v-model="Option1app2" type="text" placeholder="Board name">
+            </div>
+            <div class="input-container2">
+              <button class="infoBtn" @click="showTargetInfoReaction = !showTargetInfoReaction">i</button>
+              <input v-model="Option2app2" type="text" placeholder="Email">
             </div>
           </div>
 
@@ -671,25 +671,25 @@ export default {
         if (this.selectedReaction === 'Post Message Sentiments') {
           reaction_p = {
             target: this.Option1app2,
-            msg: this.Option2app2,
+            message_content: this.Option2app2,
           };
         }
         if (this.selectedReaction === 'Post Message Categories') {
           reaction_p = {
             target: this.Option1app2,
-            msg: this.Option2app2,
+            message_content: this.Option2app2,
           };
         }
         if (this.selectedReaction === 'Post Message Summarize') {
           reaction_p = {
             target: this.Option1app2,
-            msg: this.Option2app2,
+            message_content: this.Option2app2,
           };
         }
         if (this.selectedReaction === 'Post Message Mail') {
           reaction_p = {
             target: this.Option1app2,
-            msg: this.Option2app2,
+            message_content: this.Option2app2,
           };
         }
       }
