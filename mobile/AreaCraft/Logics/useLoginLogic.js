@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
-import ServerUrl from "./BaseUrl";
+import { ServerUrl } from "./BaseUrl";
 
 const TIMEOUT_DURATION = 10000;
 

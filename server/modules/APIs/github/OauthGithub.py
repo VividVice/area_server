@@ -4,7 +4,6 @@ from flask import Flask, request, redirect, session, url_for
 from os import getenv
 from modules.utils.jsonToken import createToken
 from modules.database.DBsetup import UserModel
-from modules.utils.hash import server_encrypt, server_decrypt
 from modules.utils.error_classes import AuthCompromisedError
 
 def singleton(cls):
@@ -27,16 +26,13 @@ class GithubAuth():
         self.client_secret = getenv('GITHUB_CLIENT_SECRET')
 
     def get_authorize_url(self, username, return_url):
-        state = server_encrypt(username)
+        state = "Yestest"
         url = f"{self.Auth_url}?scope={self.scope}&client_id={self.client_id}&state={state}"
         url += f"&return_url={return_url}"
         return url
 
     # the callback url is /github-callback?username={username}
     def get_authificated(self, user:UserModel, code):
-        # get the data as json
-        if server_decrypt(code['state']) == False:
-            raise AuthCompromisedError(user.username, 'github')
         data = {
             'client_id': self.client_id,
             'client_secret': self.client_secret,

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { WebView } from "react-native-webview";
 import axios from "axios";
-import ServerUrl from "./BaseUrl";
+import { ServerUrl } from "./BaseUrl";
 import { View, Text } from "react-native";
 
 // Ways to set up a service as POST request to /subscribe. expect a redirect url or an error response
@@ -18,12 +18,12 @@ import { View, Text } from "react-native";
 //     make sure you always send the header Authorization: Bearer {JWT token} with EVERY request
 
 function getParameterByName(name, url) {
-  name = name.replace(/[\[\]]/g, '\\$&');
-  var regex = new RegExp('[?&#]' + name + '(=([^&#]*)|&|#|$)'),
-      results = regex.exec(url);
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&#]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
   if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  if (!results[2]) return "";
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 function SpotifySubscribe({ tokenSession, return_destination }) {
@@ -57,23 +57,26 @@ function SpotifySubscribe({ tokenSession, return_destination }) {
       });
   }, []);
 
-    useEffect(() => {
-      if (Isauth) {
-        navigation.navigate(return_destination, { token: tokenSession });
-      }
-    }, [Isauth, navigation, return_destination]);
+  useEffect(() => {
+    if (Isauth) {
+      navigation.navigate(return_destination, { token: tokenSession });
+    }
+  }, [Isauth, navigation, return_destination]);
   const sendToken = (url) => {
     // get the token form url params
     console.log("urlToken:", url);
     const token = getParameterByName("token", url);
     console.log("tokenGithub:", token);
-    const response = axios.get(`${ServerUrl()}/spotify/?access_token=${token}`, {
-      timeout: 10000,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${tokenSession}`,
-      },
-    });
+    const response = axios.get(
+      `${ServerUrl()}/spotify/?access_token=${token}`,
+      {
+        timeout: 10000,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tokenSession}`,
+        },
+      }
+    );
     console.log(response);
   };
 
