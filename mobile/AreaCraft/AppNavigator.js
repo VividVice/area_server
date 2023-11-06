@@ -9,6 +9,7 @@ import TrelloSub from './TrelloSub';
 import GitHubSub from './GitHubSub';
 import SpotifySub from './SpotifySub';
 import GoToGithub from './GoToGithub';
+import NetWorkConfig from './NetWorkConfig';
 
 const Stack = createStackNavigator();
 
@@ -46,6 +47,7 @@ function AppNavigator() {
       <Stack.Screen name="GitHubSub" component={GitHubSub} options={{ title: 'Github' }}/>
       <Stack.Screen name="SpotifySub" component={SpotifySub} options={{ title: 'Spotify' }}/>
       <Stack.Screen name="GoToGithub" component={GoToGithub} options={{ title: 'Github' }}/>
+      <Stack.Screen name="NetWorkConfig" component={NetWorkConfig} options={{ title: 'Network' }}/>
     </Stack.Navigator>
   );
 }

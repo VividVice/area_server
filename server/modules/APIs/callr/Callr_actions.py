@@ -13,7 +13,7 @@ def create_webhook(user:UserModel, type, endpoint, options):
         api_password = user_services["password"]
         print(api_login, api_password)
         api = callr.Api(api_login, api_password)
-        result = api.call('webhooks.create', type, endpoint, options)
+        result = api.call('webhooks.subscribe', type, endpoint, options)
         print(result)
     except Exception as e:
         print(e)
