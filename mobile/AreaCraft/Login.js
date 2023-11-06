@@ -25,7 +25,9 @@ export default function LoginComponent() {
 
   const [fontLoaded, setFontLoaded] = useState(false);
   const [istouch, setIstouch] = useState(false);
+  const [changeNetwork, setChangeNetwork] = useState(false);
   const navigation = useNavigation();
+
   useEffect(() => {
     async function loadFont() {
       await Font.loadAsync({
@@ -42,7 +44,10 @@ export default function LoginComponent() {
     if (istouch) {
       navigation.navigate("GoToGithub");
     }
-  }, [istouch, navigation]);
+    if (changeNetwork) {
+      navigation.navigate("NetWorkConfig");
+    }
+  }, [changeNetwork, istouch, navigation]);
 
   if (!fontLoaded) return null;
 
@@ -110,6 +115,9 @@ export default function LoginComponent() {
         <TouchableOpacity style={styles.customButton} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.button2} onPress={() => setChangeNetwork(true)}>
+          <Text style={styles.network}>Change network configuration</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
@@ -137,6 +145,13 @@ const styles = StyleSheet.create({
     color: COLORS.bluetech,
     fontFamily: 'custom-font'
   },
+  network: {
+    fontSize: 19,
+    marginBottom: 20,
+    textAlign: 'center',
+    color: '#F2F2F2',
+    fontFamily: 'custom-font-quicksand'
+  },
   slogan: {
     fontSize: 18,
     marginBottom: 18,
@@ -162,6 +177,12 @@ const styles = StyleSheet.create({
     fontFamily: 'custom-font'
   },
   button: {
+    marginTop: 10,
+    borderRadius: 5,
+    overflow: 'hidden',
+    fontFamily: 'custom-font'
+  },
+  button2: {
     marginTop: 10,
     borderRadius: 5,
     overflow: 'hidden',

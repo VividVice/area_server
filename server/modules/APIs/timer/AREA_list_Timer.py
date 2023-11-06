@@ -12,6 +12,6 @@ reactions_list = [
         "name": "getCurrentTime",
 		"description": "get the current time",
         "function_name": "get_current_time",
-		"params": {"continent/city": str}
+		"params": {"target": str, "city": str}
     },
 ]

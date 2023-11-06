@@ -48,7 +48,7 @@ class WebHookCallr(Resource):
             try:
                 # loop though the Areas in user.service_args["callr"]["Areas"] and check if the action_type is the same as an entry in the Areas with prop action
                 # if it is then call the functions inside it via FuncInvoker
-                action_type = request.json['action']['type']
+                action_type = request.json['type']
                 for area in user.user_services["callr"]["Areas"]:
                     if area["action"] == action_type:
                         for reaction in area["subbed_reactions"]:
