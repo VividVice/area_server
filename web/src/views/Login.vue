@@ -17,6 +17,7 @@
     </div>
     <div class="message">{{ message }}</div>
     <div class="align-right">
+      <input type="checkbox" v-model="rememberMe"> Remember me
       <button class="create-account-button" @click="register">Create account</button>
     </div>
     <div>
@@ -32,6 +33,7 @@ export default {
       username: '',
       password: '',
       message: '',
+      rememberMe: false,
     };
   },
   methods: {
@@ -48,6 +50,7 @@ export default {
           body: JSON.stringify({
             username: this.username,
             password: this.password,
+            rememberMe: this.rememberMe,
           }),
         })
           .then((response) => {
