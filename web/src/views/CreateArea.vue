@@ -8,7 +8,7 @@
         <option value="Trello">&#x1F4DD; Trello</option>
         <option value="Spotify">&#x1F3B5; Spotify</option>
         <option value="Callr">&#x1F4DE; Callr</option>
-        <!-- <option value="Timer">&#x23F0; Timer</option> -->
+        <!-- <option value="Time">&#x23F0; Time</option> -->
         <!-- <option value="Weather">&#x2601; Weather</option> -->
       </select>
     </div>
@@ -22,7 +22,7 @@
         <option value="ChatGPT">&#x1F4AC; ChatGPT</option>
         <option value="Callr">&#x1F4DE; Callr</option>
         <option value="Weather">&#x2601; Weather</option>
-        <!-- <option value="Timer">&#x23F0; Timer</option> -->
+        <option value="Time">&#x23F0; Time</option>
       </select>
     </div>
   </div>
@@ -58,7 +58,7 @@
         <option v-if="selectedApp1 === 'Spotify'" value="Create Playlist">Create Playlist</option>
         <option v-if="selectedApp1 === 'Spotify'" value="Create Saved Track">Create Saved Track</option>
         <option v-if="selectedApp1 === 'Spotify'" value="Create Track Added To Playlist">Create Track Added To Playlist</option>
-        <!-- <option v-if="selectedApp1 === 'Timer'" value="Timer">Create a Timer</option> -->
+        <!-- <option v-if="selectedApp1 === 'Time'" value="Time">Create a Time</option> -->
         <!-- <option v-if="selectedApp1 === 'Weather'" value="Weather">Weather change</option> -->
         <!-- <option v-if="selectedApp1 === 'Weather'" value="Temperature">Temperature</option> -->
       </select>
@@ -101,7 +101,7 @@
         <option v-if="selectedApp2 === 'Callr'" value="Update Media TTS">Update Media TTS</option>
         <option v-if="selectedApp2 === 'Callr'" value="Get List of Medias">Get List of Medias</option>
         <option v-if="selectedApp2 === 'Weather'" value="Get Current Weather">Get Current Weather</option>
-        <option v-if="selectedApp2 === 'Timer'" value="Create timer">World Clock</option>
+        <option v-if="selectedApp2 === 'Time'" value="Get Current Time">Get Current Time</option>
       </select>
       <button v-if="selectedApp2 === 'Trello' && !trelloToken" @click="handleTrelloLogIn">Login to Trello</button>
       <div v-if="selectedApp2 === 'Callr' && !isCallrConnected" class="input-container2">
@@ -117,11 +117,11 @@
     <div class="create-area" v-show="(selectedAction && selectedReaction) && (selectedReaction !== 'Get Quota Status' && selectedReaction !== 'Get List of Medias')">
       <h2 class="appName2" style="margin-bottom: 40px;">Step 3</h2>
       <div class="grid-container">
-        <!-- <div class="grid-item">
-          <h2 selectedApp1 === 'Weather'">Action Params</h2>
+        <div class="grid-item">
+          <!-- <h2 selectedApp1 === 'Weather'">Action Params</h2>
           <h2 v-else>ㅤ</h2>
-          <div v-if="selectedApp1 === 'Timer'">
-            <h2 class="nameOfParam">Create a Timer (in seconds)</h2>
+          <div v-if="selectedApp1 === 'Time'">
+            <h2 class="nameOfParam">Create a Time (in seconds)</h2>
             <p v-if="showTargetInfoAction">Insert the time in seconds</p>
             <div class="input-container2">
               <button class="infoBtn" @click="showTargetInfoAction = !showTargetInfoAction">i</button>
@@ -136,8 +136,8 @@
               <button class="infoBtn" @click="showTargetInfoAction = !showTargetInfoAction">i</button>
               <input v-model="Option1app1" type="text" placeholder="City">
             </div>
-          </div>
-        </div> -->
+          </div> -->
+        </div>
         <div class="grid-item">
           <h2>Reaction Params</h2>
 
@@ -371,7 +371,7 @@
             </div>
           </div>
 
-          <div v-else-if="selectedApp2 === 'Timer' && selectedReaction === 'World Clock'">
+          <div v-else-if="selectedApp2 === 'Time' && selectedReaction === 'Get Current Time'">
             <h2 class="nameOfParam">City Parameter</h2>
             <p v-if="showTargetInfoReaction">Insert the target number and receive the time of the city (ex: +33612345678)</p>
             <p v-if="showMessageInfoReaction">Insert the city you want to know the time</p>
@@ -452,7 +452,7 @@ export default {
       //   { value: 'Trello', name: 'Trello', icon: 'web/src/assets/appIcons/trello-icon.png' },
       //   { value: 'Spotify', name: 'Spotify', icon: 'web/src/assets/appIcons/spotify-icon.png' },
       //   { value: 'Callr', name: 'Callr', icon: 'web/src/assets/appIcons/callr-icon.png' },
-      //   { value: 'Timer', name: 'Timer', icon: 'web/src/assets/appIcons/timer-icon.png' },
+      //   { value: 'Time', name: 'Time', icon: 'web/src/assets/appIcons/time-icon.png' },
       //   { value: 'Weather', name: 'Weather', icon: 'web/src/assets/appIcons/meteo-icon.png' },
       // ],
       selectedAction: '',
@@ -560,14 +560,14 @@ export default {
     },
     setActionParams() {
       let action_p = {};
-      if (this.selectedApp1 === 'Time') {
-        if (this.selectedAction === 'Create timer') {
-          action_p = {
-            hour: this.Option1app1,
-            minute: this.Option2app1,
-          };
-        }
-      }
+      // if (this.selectedApp1 === 'Time') {
+      //   if (this.selectedAction === 'Get Current Time') {
+      //     action_p = {
+      //       hour: this.Option1app1,
+      //       minute: this.Option2app1,
+      //     };
+      //   }
+      // }
       if (this.selectedApp1 === 'Weather') {
         if (this.selectedAction === 'Temperature') {
           action_p = {
@@ -689,8 +689,8 @@ export default {
         }
       }
 
-      if (this.selectedApp2 === 'Timer') {
-        if (this.selectedReaction === 'World Clock') {
+      if (this.selectedApp2 === 'Time') {
+        if (this.selectedReaction === 'Get Current Time') {
           reaction_p = {
             target: this.Option1app2,
             city: this.Option2app2,

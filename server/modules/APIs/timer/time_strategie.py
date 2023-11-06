@@ -12,7 +12,5 @@ class TimerSubstrtegy(SubscriptionStrategy):
 
 class TimerUnsubStrategy(UnSubscriptionStrategy):
     def execute(self, user:UserModel, service_args: dict):
-        if user.user_services["callr"] == None or user.user_services["callr"] == False:
-            return {"message": "Not sub to service."}, 400
         DB.UnSubcripeToService(user, "time")
         return {"message": "Service removed successfully."}, 200
