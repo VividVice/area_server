@@ -700,13 +700,13 @@ export default {
       return reaction_p;
     },
     formatAction(action) {
-      if (this.selectedApp1 === 'Callr' && action === 'Outbound Hangup') {
+      if (this.selectedApp1 === 'Callr' && action === 'Call Outbound Hangup') {
         return 'call.outbound_hangup';
-      } else if (this.selectedApp1 === 'Callr' && action === 'Inbound Start') {
+      } else if (this.selectedApp1 === 'Callr' && action === 'Call Inbound Start') {
         return 'call.inbound_start';
-      } else if (this.selectedApp1 === 'Callr' && action === 'Outbound Start') {
+      } else if (this.selectedApp1 === 'Callr' && action === 'Call Outbound Start') {
         return 'call.outbound_start';
-      } else if (this.selectedApp1 === 'Callr' && action === 'Inbound Hangup') {
+      } else if (this.selectedApp1 === 'Callr' && action === 'Call Inbound Hangup') {
         return 'call.inbound_hangup';
       } else if (this.selectedApp1 === 'Callr' && action === 'Media Recording') {
         return 'media.recording.new';
