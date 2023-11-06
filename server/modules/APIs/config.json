@@ -1,0 +1,18 @@
+
+{
+    "connections": [
+        {
+            "source_api": "discord",
+            "event": "message_received",
+            "target_api": "spotify",
+            "action": "create_playlist"
+        },
+        {
+            "source_api": "source_api_name",
+            "event": "event_name",
+            "target_api": "target_api_name",
+            "action": "action_name"
+        }
+    ],
+    "_comment": "Example config for the api controller"
+}

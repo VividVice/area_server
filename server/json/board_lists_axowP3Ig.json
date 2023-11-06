@@ -1,0 +1,52 @@
+[
+    {
+        "id": "6511b75a07d7161ece130334",
+        "name": "Todo Areas",
+        "closed": false,
+        "idBoard": "65082e203c652652c3b41311",
+        "pos": 32767.5,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "65082e3e41c336da4c3e07c9",
+        "name": "to do",
+        "closed": false,
+        "idBoard": "65082e203c652652c3b41311",
+        "pos": 65535,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "65082e403ef87b284c1e3ac5",
+        "name": "doing",
+        "closed": false,
+        "idBoard": "65082e203c652652c3b41311",
+        "pos": 131071,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "65082e42384e03b312a32b9f",
+        "name": "done",
+        "closed": false,
+        "idBoard": "65082e203c652652c3b41311",
+        "pos": 196607,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    },
+    {
+        "id": "65255c516567fcc8c90a2b86",
+        "name": "in Pause",
+        "closed": false,
+        "idBoard": "65082e203c652652c3b41311",
+        "pos": 262143,
+        "subscribed": false,
+        "softLimit": null,
+        "status": null
+    }
+]

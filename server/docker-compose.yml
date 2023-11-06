@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  flask-app:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    command: ["python", "main.py", "--host", "0.0.0.0"]
+
+networks:
+  default:
+    driver: bridge

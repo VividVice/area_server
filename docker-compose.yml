@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  server:
+    build: ./server
+    ports:
+      - "8080:8080"
+    networks:
+      - mynetwork
+
+  web:
+    build: ./web
+    ports:
+      - "8081:8081"
+    depends_on:
+      - server
+    networks:
+      - mynetwork
+
+  # mobile:
+  #   build: ./mobile
+  #   ports:
+  #     - "8082:8082"
+  #   depends_on:
+  #     - server
+  #   networks:
+  #     - mynetwork
+
+networks:
+  mynetwork:

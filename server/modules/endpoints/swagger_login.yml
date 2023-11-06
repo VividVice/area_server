@@ -1,0 +1,73 @@
+swagger: '2.0'
+info:
+  title: 'Area API'
+  description: 'API for user login and token creation'
+  version: '1.0'
+consumes:
+  - 'application/json'
+produces:
+  - 'application/json'
+paths:
+  /login:
+    post:
+      summary: 'Handles login and token creation'
+      description: 'Can send a username and password or a token. If a token is sent it will be validated and a new token will be sent back if valid. If a username and password is sent it will be validated and a token will be sent back if valid.'
+      parameters:
+        - name: 'username'
+          in: 'formData'
+          type: 'string'
+          required: true
+          description: 'The username of the user'
+        - name: 'password'
+          in: 'formData'
+          type: 'string'
+          required: true
+          description: 'The password of the user'
+        - name: 'rememberMe'
+          in: 'formData'
+          type: 'boolean'
+          required: false
+          description: 'Whether to remember the user or not'
+      responses:
+        '200':
+          description: 'Success'
+          schema:
+            type: 'object'
+            properties:
+              token:
+                type: 'string'
+                description: 'The JWT token'
+        '401':
+          description: 'Invalid credentials or token expired'
+        '500':
+          description: 'Internal server error'
+  /register:
+    post:
+      summary: 'Handles registration and token creation'
+      description: 'Can send a username and password. If a username and password is sent it will be validated and new user will be added to BD. A token will be sent back as well.'
+      parameters:
+        - name: 'username'
+          in: 'formData'
+          type: 'string'
+          required: true
+          description: 'The username of the user'
+        - name: 'password'
+          in: 'formData'
+          type: 'string'
+          required: true
+          description: 'The password of the user'
+      responses:
+        '201':
+          description: 'Success'
+          schema:
+            type: 'object'
+            properties:
+              token:
+                type: 'string'
+                description: 'The JWT token'
+        '400':
+          description: 'Invalid credentials'
+        '409':
+          description: 'User already exists'
+        '500':
+          description: 'Internal server error'

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trello Authentication</title>
+</head>
+<body>
+    <h1>Trello Authentication</h1>
+    <p>Click the link below to authenticate with Trello:</p>
+    <a href="{{ authorization_url }}" target="_blank">Authorize with Trello</a>
+    <form action="/oauth_callback" method="post">
+        <label for="verification_code">Enter the verification code you received from Trello:</label><br>
+        <input type="text" id="verification_code" name="verification_code"><br><br>
+        <input type="submit" value="Authenticate">
+    </form>
+</body>
+</html>
+

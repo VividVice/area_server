@@ -1,0 +1,14 @@
+Flask
+Flask-RESTful
+Flask-CORS
+python-dotenv
+Flask-SQLAlchemy
+SQLAlchemy
+SQLAlchemy-Utils
+passlib
+PyJWT
+python-jose
+flasgger
+spotipy
+sqlalchemy-json
+callr
