@@ -47,10 +47,11 @@ def Create_Area(user, action_name : str,
         "trello" : {
             "access_token": str, # specific to the service Trello in this case other service may use different things
             # the field below will be there for all services
-            "Areas": [{ "action": str, "subbed_reactions": [{"service_name": str, "reaction_name": str,"function_name" : str, params: {"arg_name": "arg_value", ...}}]}]
+            "Areas": [{ "action": str, "subbed_reactions": [{"service_name": str, "reaction_name": str,"id" : int,"function_name" : str, params: {"arg_name": "arg_value", ...}}]}]
         }
     }
     the first Area of each user will have Areas = []
+    id is the index of the reaction in the subbed_reactions array
     """
     service_args = DB.getServiceArgs(user, action_service)
     # get the function to call for the reaction
@@ -62,7 +63,8 @@ def Create_Area(user, action_name : str,
                 "service_name": reaction_service,
                 "reaction_name": reaction_name,
                 "function_name": reaction_function,
-                "params": reaction_params
+                "params": reaction_params,
+                "id": len(area["subbed_reactions"])
             })
             # update the database
             user.user_services[action_service] = service_args
@@ -76,7 +78,8 @@ def Create_Area(user, action_name : str,
             "service_name": reaction_service,
             "reaction_name": reaction_name,
             "function_name": reaction_function,
-            "params": reaction_params
+            "params": reaction_params,
+            "id": 0
         }]
     })
     user.user_services[action_service] = service_args
