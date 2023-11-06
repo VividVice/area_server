@@ -58,20 +58,21 @@ function GithubOauth({ return_destination, SetTokenSession }) {
       });
   }, []);
 
-  const sendToken = (url) => {
+  const sendToken = async (url) => {
     const code = getParameterByName("code", url);
     try {
-      response = axios.get(`${ServerUrl()}/OauthGithub/access?code=${code}`, {
+      response = await axios.get(`${ServerUrl()}/OauthGithub/access?code=${code}`, {
         timeout: 10000,
         headers: {
           "Content-Type": "application/json",
         },
       });
-      if (response.status === 200) {
-        SetTokenSession(response.data.token);
-      }
+      console.log("response.data.token:", response);
+      SetTokenSession(response.data.token);
+      setIsauth(true);
     } catch (error) {
       alert("Error:", error);
+      console.log(error);
     }
   };
 
@@ -84,12 +85,23 @@ function GithubOauth({ return_destination, SetTokenSession }) {
       setIsauth(false);
       return true;
     } else {
+      console.log("hhhhhhhhhhhhhhhhhh", url);
       // check if the redirect url is in the url
-      if (url.includes(return_destination)) {
+      // reomeve the http:// or https:// from return_destination and save it in a var
+      const return_dest = return_destination.replace(
+        /https?:\/\//,
+        ""
+      );
+      console.log("url:", url);
+      console.log("return_dest:", return_dest);
+      if (url.includes(return_dest)) {
+        console.log("Redirect url found in url:", url);
         // if so, we are done here
         sendToken(url);
-        setIsauth(true);
         return false;
+      }
+      else {
+        return true;
       }
     }
   };
