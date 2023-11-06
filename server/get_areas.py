@@ -19,6 +19,8 @@ def get_subscribed_areas():
             # also for each reaction subbed for each action add an id that corresponds to the index of the reaction in the subbed_reactions array
             return_data = []
             for service_name in user.user_services:
+                if user.user_services[service_name] == False:
+                    continue
                 for area in user.user_services[service_name]["Areas"]:
                     for reaction in area["subbed_reactions"]:
                         return_data.append({
