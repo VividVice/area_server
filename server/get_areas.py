@@ -24,11 +24,12 @@ def get_subscribed_areas():
                 for area in user.user_services[service_name]["Areas"]:
                     for reaction in area["subbed_reactions"]:
                         return_data.append({
-                            "service_name": service_name,
+                            "actio_service_name": service_name,
                             "action": area["action"],
                             "reaction_name": reaction["reaction_name"],
+                            "reaction_service_name": reaction["service_name"],
                             "id": reaction["id"],
-                            "params": reaction["params"]
+                            "params_reaction": reaction["params"]
                         })
             return jsonify(return_data), 200
         else:
