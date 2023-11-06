@@ -10,18 +10,17 @@ def get_subscribed_areas():
     # Get the username from the request parameters or headers, depending on your use case
     token = request.headers.get('Authorization')
     print(token, file=stderr)
-    if token and token.startswith('Bearer '):
-        payload = UnpackToken(token, False)
+    payload = UnpackToken(token, True)
     if payload:
         user = DataBaseOpps.GetUser(payload["username"])
         if user:
             subscribed_areas = [service for service, value in user.user_services.items() if value]
             print(subscribed_areas, file=stderr)
-            return jsonify(subscribed_areas)
+            return jsonify(subscribed_areas), 200
         else:
-            return jsonify({"error": "User not found"})
+            return jsonify({"error": "User not found"}), 404
     else:
-        return jsonify({"error": "Username not provided"})
+        return jsonify({"error": "Username not provided"}), 403
 
 
 app = Config().GetApp()
