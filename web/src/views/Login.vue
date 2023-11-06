@@ -16,7 +16,7 @@
       <input type="password" v-model="password" placeholder="Password">
     </div>
     <div class="message">{{ message }}</div>
-    <div class="align-right">
+    <div class="rememberMe">
       <input type="checkbox" v-model="rememberMe"> Remember me
       <button class="create-account-button" @click="register">Create account</button>
     </div>
@@ -170,8 +170,8 @@ export default {
 .rememberMe {
   margin-bottom: 15px;
   font-family: 'Quicksand_Light', serif;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 30%;
+  margin-right: 30%;
   font-size: 16px;
 }
 
