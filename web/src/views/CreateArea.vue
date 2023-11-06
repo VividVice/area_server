@@ -6,7 +6,6 @@
       <select v-model="selectedApp1" class="dropbtn">
         <option value="" disabled selected hidden>Select app to connect</option>
         <option value="Trello">&#x1F4DD; Trello</option>
-        <option value="Spotify">&#x1F3B5; Spotify</option>
         <option value="Callr">&#x1F4DE; Callr</option>
         <!-- <option value="Time">&#x23F0; Time</option> -->
         <!-- <option value="Weather">&#x2601; Weather</option> -->
@@ -18,7 +17,6 @@
       <select v-model="selectedApp2" class="dropbtn">
         <option value="" disabled selected hidden>Select app to connect</option>
         <option value="Trello">&#x1F4DD; Trello</option>
-        <option value="Spotify">&#x1F3B5; Spotify</option>
         <option value="ChatGPT">&#x1F4AC; ChatGPT</option>
         <option value="Callr">&#x1F4DE; Callr</option>
         <option value="Weather">&#x2601; Weather</option>
@@ -42,28 +40,24 @@
         <option v-if="selectedApp1 === 'Callr'" value="Send SMS">Send SMS</option>
         <option v-if="selectedApp1 === 'Callr'" value="DID Assigned">DID Assigned</option>
         <option v-if="selectedApp1 === 'Callr'" value="DID Unassigned">DID Unassigned</option>
-        <option v-if="selectedApp1 === 'Callr'" value="Incoming Call">Incoming Call</option>
+        <!--  -->
         <option v-if="selectedApp1 === 'Trello'" value="Create Card">Create Card</option>
         <option v-if="selectedApp1 === 'Trello'" value="Create List">Create List</option>
         <option v-if="selectedApp1 === 'Trello'" value="Create Board">Create Board</option>
         <option v-if="selectedApp1 === 'Trello'" value="Create Member">Create Member</option>
-        <option v-if="selectedApp1 === 'Trello'" value="Card Updated">Card Updated</option>
-        <option v-if="selectedApp1 === 'Trello'" value="List Updated">List Updated</option>
-        <option v-if="selectedApp1 === 'Trello'" value="Board Updated">Board Updated</option>
-        <option v-if="selectedApp1 === 'Trello'" value="Member Updated">Member Updated</option>
-        <option v-if="selectedApp1 === 'Trello'" value="Card Deleted">Card Deleted</option>
-        <option v-if="selectedApp1 === 'Trello'" value="List Deleted">List Deleted</option>
-        <option v-if="selectedApp1 === 'Trello'" value="Board Deleted">Board Deleted</option>
-        <option v-if="selectedApp1 === 'Trello'" value="Member Deleted">Member Deleted</option>
-        <option v-if="selectedApp1 === 'Spotify'" value="Create Playlist">Create Playlist</option>
-        <option v-if="selectedApp1 === 'Spotify'" value="Create Saved Track">Create Saved Track</option>
-        <option v-if="selectedApp1 === 'Spotify'" value="Create Track Added To Playlist">Create Track Added To Playlist</option>
+        <option v-if="selectedApp1 === 'Trello'" value="Update Card">Update Card</option>
+        <option v-if="selectedApp1 === 'Trello'" value="Update List">Update List</option>
+        <option v-if="selectedApp1 === 'Trello'" value="Update Board">Update Board</option>
+        <option v-if="selectedApp1 === 'Trello'" value="Delete Card">Delete Card</option>
+        <option v-if="selectedApp1 === 'Trello'" value="Delete List">Delete List</option>
+        <option v-if="selectedApp1 === 'Trello'" value="Delete Board">Delete Board</option>
+        <option v-if="selectedApp1 === 'Trello'" value="Delete Member">Delete Member</option>
+        <!--  -->
         <!-- <option v-if="selectedApp1 === 'Time'" value="Time">Create a Time</option> -->
         <!-- <option v-if="selectedApp1 === 'Weather'" value="Weather">Weather change</option> -->
         <!-- <option v-if="selectedApp1 === 'Weather'" value="Temperature">Temperature</option> -->
       </select>
       <button v-if="selectedApp1 === 'Trello' && !trelloToken" @click="handleTrelloLogIn">Login to Trello</button>
-      <!-- <button v-if="selectedApp1 === 'Spotify'" @click="handleLoginApp1">Login to Spotify</button> -->
       <div v-if="selectedApp1 === 'Callr' && !isCallrConnected" class="input-container2">
         <h2 class="slogan">Enter your Callr credentials</h2>
         <h2 class="nameOfParam">Username</h2>
@@ -82,25 +76,28 @@
         <option v-if="selectedApp2 === 'ChatGPT'" value="Post Message Categories">Create Categories From Text</option>
         <option v-if="selectedApp2 === 'ChatGPT'" value="Post Message Summarize">Summarize Text</option>
         <option v-if="selectedApp2 === 'ChatGPT'" value="Post Message Mail">Create Mail From Text</option>
-        <option v-if="selectedApp2 === 'Spotify'" value="Create Playlist:">Create Playlist</option>
-        <option v-if="selectedApp2 === 'Spotify'" value="Find Track">Find Track</option>
-        <option v-if="selectedApp2 === 'Spotify'" value="Save Track">Save Track</option>
-        <option v-if="selectedApp2 === 'Trello'" value="Create Board">Create Board</option>
-        <option v-if="selectedApp2 === 'Trello'" value="Create List">Create List</option>
+        <!--  -->
         <option v-if="selectedApp2 === 'Trello'" value="Create Card">Create Card</option>
-        <option v-if="selectedApp2 === 'Trello'" value="Add Member">Add Member</option>
-        <option v-if="selectedApp2 === 'Trello'" value="Delete Board">Delete Board</option>
-        <option v-if="selectedApp2 === 'Trello'" value="Delete List">Delete List</option>
-        <option v-if="selectedApp2 === 'Trello'" value="Delete Card">Delete Card</option>
-        <option v-if="selectedApp2 === 'Trello'" value="Delete Member">Delete Member</option>
+        <option v-if="selectedApp2 === 'Trello'" value="Create List">Create List</option>
+        <option v-if="selectedApp2 === 'Trello'" value="Create Board">Create Board</option>
+        <option v-if="selectedApp2 === 'Trello'" value="Create Member">Create Member</option>
+        <option v-if="selectedApp2 === 'Trello'" value="Update Card">Update Card</option>
+        <option v-if="selectedApp2 === 'Trello'" value="Update List">Update List</option>
         <option v-if="selectedApp2 === 'Trello'" value="Update Board">Update Board</option>
+        <option v-if="selectedApp2 === 'Trello'" value="Delete Card">Delete Card</option>
+        <option v-if="selectedApp2 === 'Trello'" value="Delete List">Delete List</option>
+        <option v-if="selectedApp2 === 'Trello'" value="Delete Board">Delete Board</option>
+        <option v-if="selectedApp2 === 'Trello'" value="Delete Member">Delete Member</option>
+        <!--  -->
         <option v-if="selectedApp2 === 'Callr'" value="Make Call">Make Call</option>
         <option v-if="selectedApp2 === 'Callr'" value="Create Media">Create Media</option>
         <option v-if="selectedApp2 === 'Callr'" value="Get Quota Status">Get Quota Status</option>
         <option v-if="selectedApp2 === 'Callr'" value="Send SMS">Send SMS</option>
         <option v-if="selectedApp2 === 'Callr'" value="Update Media TTS">Update Media TTS</option>
         <option v-if="selectedApp2 === 'Callr'" value="Get List of Medias">Get List of Medias</option>
+        <!--  -->
         <option v-if="selectedApp2 === 'Weather'" value="Get Current Weather">Get Current Weather</option>
+        <!--  -->
         <option v-if="selectedApp2 === 'Time'" value="Get Current Time">Get Current Time</option>
       </select>
       <button v-if="selectedApp2 === 'Trello' && !trelloToken" @click="handleTrelloLogIn">Login to Trello</button>
@@ -245,7 +242,7 @@
             </div>
           </div>
 
-          <div v-else-if="selectedApp2 === 'Trello' && selectedReaction === 'Add Member'">
+          <div v-else-if="selectedApp2 === 'Trello' && selectedReaction === 'Create Member'">
             <h2 class="nameOfParam">Member Name</h2>
             <p v-if="showTargetInfoReaction">Insert the name of the member</p>
             <p v-if="showMessageInfoReaction">Insert the name of the board</p>
@@ -303,14 +300,14 @@
           <div v-else-if="selectedApp2 === 'Weather'">
             <h2 class="nameOfParam">Weather</h2>
             <p v-if="showTargetInfoReaction">Insert a target number and receive the current weather (ex: +33612345678)</p>
-            <p v-if="showMessageInfoAction">Insert a city name and get the current weather</p>
+            <p v-if="showMessageInfoAction">Insert the continent + a city name and get the current weather (ex: Europe/Paris)</p>
             <div class="input-container2">
               <button class="infoBtn" @click="showTargetInfoAction = !showTargetInfoAction">i</button>
               <input v-model="Option1app2" type="text" placeholder="Target">
             </div>
             <div class="input-container2">
               <button class="infoBtn" @click="showMessageInfoAction = !showMessageInfoAction">i</button>
-              <input v-model="Option2app2" type="text" placeholder="City">
+              <input v-model="Option2app2" type="text" placeholder="Continent/City">
             </div>
           </div>
 
@@ -374,7 +371,7 @@
           <div v-else-if="selectedApp2 === 'Time' && selectedReaction === 'Get Current Time'">
             <h2 class="nameOfParam">City Parameter</h2>
             <p v-if="showTargetInfoReaction">Insert the target number and receive the time of the city (ex: +33612345678)</p>
-            <p v-if="showMessageInfoReaction">Insert the city you want to know the time</p>
+            <p v-if="showMessageInfoReaction">Insert the city you want to know the time (ex: Paris)</p>
             <div class="input-container2">
               <button class="infoBtn" @click="showTargetInfoReaction = !showTargetInfoReaction">i</button>
               <input v-model="Option1app2" type="text" placeholder="Target">
@@ -450,7 +447,6 @@ export default {
       selectedApp2: '',
       // options: [
       //   { value: 'Trello', name: 'Trello', icon: 'web/src/assets/appIcons/trello-icon.png' },
-      //   { value: 'Spotify', name: 'Spotify', icon: 'web/src/assets/appIcons/spotify-icon.png' },
       //   { value: 'Callr', name: 'Callr', icon: 'web/src/assets/appIcons/callr-icon.png' },
       //   { value: 'Time', name: 'Time', icon: 'web/src/assets/appIcons/time-icon.png' },
       //   { value: 'Weather', name: 'Weather', icon: 'web/src/assets/appIcons/meteo-icon.png' },
@@ -513,15 +509,6 @@ export default {
         console.error(error);
       }
     },
-    handleSpotifyLogIn() {
-      const spotifyLoginUrl = 'https://accounts.spotify.com/authorize?client_id=1c3c0b0c0b6c4b6e9a0b0b6c0c0b6c4b&response_type=code&redirect_uri=http://51.20.135.59:80/spotify&scope=user-read-private%20user-read-email%20playlist-modify-public%20playlist-modify-private%20user-library-read%20user-library-modify';
-      const popupWidth = 1100;
-      const popupHeight = 600;
-      const left = (window.innerWidth / 2) - (popupWidth / 2);
-      const top = (window.innerHeight / 2) - (popupHeight / 2);
-      const popupOptions = `width=${popupWidth},height=${popupHeight},left=${left},top=${top}`;
-      window.open(spotifyLoginUrl, 'spotify-login', popupOptions);
-    },
     async handleCallrLogIn() {
       if (!this.callrUsername || !this.callrPassword) {
         alert('Please enter your Callr credentials');
@@ -568,13 +555,13 @@ export default {
       //     };
       //   }
       // }
-      if (this.selectedApp1 === 'Weather') {
-        if (this.selectedAction === 'Temperature') {
-          action_p = {
-            temperature: this.Option1app1,
-          };
-        }
-      }
+      // if (this.selectedApp1 === 'Weather') {
+      //   if (this.selectedAction === 'Temperature') {
+      //     action_p = {
+      //       temperature: this.Option1app1,
+      //     };
+      //   }
+      // }
       return action_p;
     },
     setReactionParams() {
@@ -680,6 +667,33 @@ export default {
         }
       }
 
+      if (this.selectedApp2 === 'ChatGPT') {
+        if (this.selectedReaction === 'Post Message Sentiments') {
+          reaction_p = {
+            target: this.Option1app2,
+            msg: this.Option2app2,
+          };
+        }
+        if (this.selectedReaction === 'Post Message Categories') {
+          reaction_p = {
+            target: this.Option1app2,
+            msg: this.Option2app2,
+          };
+        }
+        if (this.selectedReaction === 'Post Message Summarize') {
+          reaction_p = {
+            target: this.Option1app2,
+            msg: this.Option2app2,
+          };
+        }
+        if (this.selectedReaction === 'Post Message Mail') {
+          reaction_p = {
+            target: this.Option1app2,
+            msg: this.Option2app2,
+          };
+        }
+      }
+
       if (this.selectedApp2 === 'Weather') {
         if (this.selectedReaction === 'Get Current Weather') {
           reaction_p = {
@@ -700,13 +714,13 @@ export default {
       return reaction_p;
     },
     formatAction(action) {
-      if (this.selectedApp1 === 'Callr' && action === 'Outbound Hangup') {
+      if (this.selectedApp1 === 'Callr' && action === 'Call Outbound Hangup') {
         return 'call.outbound_hangup';
-      } else if (this.selectedApp1 === 'Callr' && action === 'Inbound Start') {
+      } else if (this.selectedApp1 === 'Callr' && action === 'Call Inbound Start') {
         return 'call.inbound_start';
-      } else if (this.selectedApp1 === 'Callr' && action === 'Outbound Start') {
+      } else if (this.selectedApp1 === 'Callr' && action === 'Call Outbound Start') {
         return 'call.outbound_start';
-      } else if (this.selectedApp1 === 'Callr' && action === 'Inbound Hangup') {
+      } else if (this.selectedApp1 === 'Callr' && action === 'Call Inbound Hangup') {
         return 'call.inbound_hangup';
       } else if (this.selectedApp1 === 'Callr' && action === 'Media Recording') {
         return 'media.recording.new';
