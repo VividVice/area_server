@@ -16,6 +16,8 @@ class END(Resource):
         Users = DB.GetAllUsers()
         for user in Users:
             for service in delete_methods.keys():
+                if not user.user_services:
+                    continue
                 if not user.user_services[service]:
                     continue
                 try:
