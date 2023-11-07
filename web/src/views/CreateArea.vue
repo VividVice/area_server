@@ -114,7 +114,7 @@
       </div>
     </div>
 
-    <div class="create-area" v-show="(selectedAction && selectedReaction) && (selectedReaction !== 'Get Quota Status' && selectedReaction !== 'Get List of Medias')">
+    <div class="create-area" v-show="(selectedAction && selectedReaction)">
       <h2 class="appName2" style="margin-bottom: 40px;">Step 3</h2>
       <div class="grid-container">
         <div class="grid-item">

@@ -38,7 +38,6 @@ const useRegisterLogic = () => {
       setIsLoading(false);
       return;
     }
-    console.log("Base url:", ServerUrl());
     try {
       const response = await axios.post(
         `${ServerUrl()}/register`,
