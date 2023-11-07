@@ -4,7 +4,7 @@
     <h2 class="appName">AreaCraft.</h2>
     <h2 class="slogan">Log in to your account</h2>
 
-    <button @click="authorize">
+    <button @click="githubLogin">
       <img src="@/assets/appIcons/github-icon.png" alt="Logo de Github" class="logo-github">
       <span>Sign in with Github</span>
     </button>
@@ -30,28 +30,74 @@
 </template>
 
 <script>
-export default {
+import axios from 'axios';
 
-  props: {
-    returnDestination: {
-      type: String,
-      default: 'http://localhost:8081',
-    },
-  },
+export default {
   data() {
     return {
       username: '',
       password: '',
       message: '',
       rememberMe: false,
+      redirectUrl: null,
+      isAuth: false,
+      returnDestination: 'http://localhost:8081/dashboard',
     };
   },
   mounted() {
-    this.authorize();
+    const code = this.getParameterByName('code');
+    if (code) {
+      this.fetchAccessToken(code);
+    }
   },
   methods: {
-    authorize() {
-      // axios.get('http://
+    getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[[]]/g, '$&');
+      const regex = new RegExp('[?&#]' + name + '(=([^&#]*)|&|#|$)');
+      const results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    },
+    async githubLogin() {
+      try {
+        if (!this.returnDestination) {
+          console.error(this.returnDestination);
+          return;
+        }
+
+        let response = await axios.post(`http://51.20.192.77:80/OuthGithub/authorize`, {
+          return_url: this.returnDestination,
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        this.redirectUrl = response.data.auth_url;
+        window.location.href = this.redirectUrl;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async fetchAccessToken(code) {
+      try {
+        let response = await axios.get(`http://51.20.192.77:80/OauthGithub/access?code=${code}`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        console.log('Token received:', response.data.token);
+        this.setTokenSession(response.data.token);
+        this.isAuth = true;
+      } catch (error) {
+        console.error('Error fetching access token:', error);
+      }
+    },
+    setTokenSession(token) {
+      // Implement the logic to store the token in the session
+      console.log('Token stored in session:', token);
     },
     login() {
       if (this.username === '' || this.password === '') {
