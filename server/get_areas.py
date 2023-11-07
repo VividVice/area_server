@@ -24,7 +24,7 @@ def get_subscribed_areas():
                 for area in user.user_services[service_name]["Areas"]:
                     for reaction in area["subbed_reactions"]:
                         return_data.append({
-                            "actio_service_name": service_name,
+                            "action_service_name": service_name,
                             "action": area["action"],
                             "reaction_name": reaction["reaction_name"],
                             "reaction_service_name": reaction["service_name"],
