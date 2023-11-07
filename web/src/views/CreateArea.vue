@@ -21,6 +21,7 @@
         <option value="Callr">&#x1F4DE; Callr</option>
         <option value="Weather">&#x2601; Weather</option>
         <option value="Time">&#x23F0; Time</option>
+        <option value="Nasa">&#x1F680; Nasa</option>
       </select>
     </div>
   </div>
@@ -99,6 +100,8 @@
         <option v-if="selectedApp2 === 'Weather'" value="Get Current Weather">Get Current Weather</option>
         <!--  -->
         <option v-if="selectedApp2 === 'Time'" value="Get Current Time">Get Current Time</option>
+        <!--  -->
+        <option v-if="selectedApp2 === 'Nasa'" value="Get Photo">Get Photo</option>
       </select>
       <button v-if="selectedApp2 === 'Trello' && !trelloToken" @click="handleTrelloLogIn">Login to Trello</button>
       <div v-if="selectedApp2 === 'Callr' && !isCallrConnected" class="input-container2">
@@ -382,6 +385,15 @@
             </div>
           </div>
 
+          <div v-else-if="selectedApp2 === 'Nasa' && selectedReaction === 'Get Photo'">
+            <h2 class="nameOfParam">Photo Parameter</h2>
+            <p v-if="showTargetInfoReaction">Insert the target number and receive a photo (ex: +33612345678)</p>
+            <div class="input-container2">
+              <button class="infoBtn" @click="showTargetInfoReaction = !showTargetInfoReaction; showMessageInfoReaction = !showMessageInfoReaction">i</button>
+              <input v-model="Option1app2" type="text" placeholder="Target">
+            </div>
+          </div>
+
           <div v-else>
             <h2 class="nameOfParam">Text Parameter</h2>
             <p v-if="showMessageInfoReaction">Insert the text you want to send</p>
@@ -425,7 +437,7 @@ export default {
     if (this.trelloToken) {
       try {
         const response = await axios.get(
-          `http://51.20.135.59:80/trello/?access_token=${this.trelloToken}`,
+          `http://51.20.192.77:80/trello/?access_token=${this.trelloToken}`,
           {
             headers: {
               Application: 'application/json',
@@ -481,7 +493,7 @@ export default {
     async handleTrelloLogIn() {
       try {
         const response = await axios.post(
-          `http://51.20.135.59:80/subscribe`,
+          `http://51.20.192.77:80/subscribe`,
           {
             service: "trello",
             service_args: {
@@ -516,7 +528,7 @@ export default {
       }
       try {
         const response = await axios.post(
-          `http://51.20.135.59:80/subscribe`,
+          `http://51.20.192.77:80/subscribe`,
           {
             service: "callr",
             service_args: {
@@ -711,6 +723,14 @@ export default {
           };
         }
       }
+
+      if (this.selectedApp2 === 'Nasa') {
+        if (this.selectedReaction === 'Get Photo') {
+          reaction_p = {
+            target: this.Option1app2,
+          };
+        }
+      }
       return reaction_p;
     },
     formatAction(action) {
@@ -755,7 +775,7 @@ export default {
       console.log(body);
 
       try {
-        const response = await fetch('http://51.20.135.59:80/create_AREA', {
+        const response = await fetch('http://51.20.192.77:80/create_AREA', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

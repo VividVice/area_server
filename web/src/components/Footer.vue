@@ -14,7 +14,7 @@
         this.$router.push('/');
       },
       downloadMobileVersion() {
-        fetch('http://51.20.135.59:80/client.apk', { // Changed to match the server's endpoint
+        fetch('http://51.20.192.77:80/client.apk', { // Changed to match the server's endpoint
           method: 'GET'
         })
         .then(response => response.blob())

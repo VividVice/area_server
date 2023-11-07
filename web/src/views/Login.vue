@@ -4,9 +4,12 @@
     <h2 class="appName">AreaCraft.</h2>
     <h2 class="slogan">Log in to your account</h2>
 
-    <!-- <GoogleLogin @onclick="login" />
+    <button @click="authorize">
+      <img src="@/assets/appIcons/github-icon.png" alt="Logo de Github" class="logo-github">
+      <span>Sign in with Github</span>
+    </button>
 
-    <h2 class="slogan">or</h2> -->
+    <h2 class="slogan">or</h2>
     <div class="input-container">
       <i class="fas fa-user icon"></i>
       <input v-model="username" placeholder="Username">
@@ -28,6 +31,13 @@
 
 <script>
 export default {
+
+  props: {
+    returnDestination: {
+      type: String,
+      default: 'http://localhost:8081',
+    },
+  },
   data() {
     return {
       username: '',
@@ -36,13 +46,19 @@ export default {
       rememberMe: false,
     };
   },
+  mounted() {
+    this.authorize();
+  },
   methods: {
+    authorize() {
+      // axios.get('http://
+    },
     login() {
       if (this.username === '' || this.password === '') {
         alert('Please fill in all fields');
         return;
       } else {
-        fetch('http://51.20.135.59:80/login', {
+        fetch('http://51.20.192.77:80/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -78,7 +94,7 @@ export default {
         this.message = 'Please fill in all fields';
         return;
       } else {
-        fetch('http://51.20.135.59:80/register', {
+        fetch('http://51.20.192.77:80/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -206,5 +222,13 @@ button:hover {
   align-self: center;
 }
 
+.google-div img {
+  width: 100%;
+}
+
+.logo-github {
+  width: 20px;
+  margin-right: 10px;
+}
 
 </style>
