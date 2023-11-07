@@ -8,6 +8,7 @@ from modules.APIs.github.Github_substract import GithubSubStrat, GithubUnSubStra
 from modules.APIs.timer.time_strategie import TimerSubstrtegy, TimerUnsubStrategy
 from modules.APIs.weather.weather_strategie import WeatherSubstrtegy, WeatherUnsubStrategy
 from modules.APIs.chatgpt.ChatGPT_strategy import ChatGPTSubStrategy, ChatGPTUnsubStrategy
+from modules.APIs.nasa.nasa_startegie import NasaSubstrtegy, NasaUnsubStrategy
 """ Key = service name , value =
     {
         "subscribe" : subscribe strategy,
@@ -42,5 +43,9 @@ list_api = {
     "chatgpt" : {
         "subscribe" : ChatGPTSubStrategy(),
         "unsubscribe" : ChatGPTUnsubStrategy()
+    },
+    "nasa" : {
+        "subscribe" : NasaSubstrtegy(),
+        "unsubscribe" : NasaUnsubStrategy()
     }
 }

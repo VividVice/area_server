@@ -3,7 +3,6 @@ from os import getenv
 path.append('../..')
 from modules.database.DB import UserModel
 from requests import  get, post, delete, put
-from os import getenv
 
 # make a obj requst that has the method get from requests
 
