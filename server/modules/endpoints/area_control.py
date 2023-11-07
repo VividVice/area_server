@@ -5,6 +5,7 @@ from modules.config.config import Config
 from modules.utils.jsonToken import UnpackToken
 from modules.APIs.AREA_lists import delete_methods
 from sys import stderr
+import traceback
 app = Config().GetApp()
 
 class Area_Control(Resource):
@@ -95,6 +96,7 @@ class Area_Control(Resource):
                             return {"message": "Area deleted"}, 200
                     return {"message": "Area not found"}, 401
                 except KeyError:
+                    traceback.print_exc()
                     return {"message": "Service not subbed"}, 401
             else :
                 return {"message": "User not found"}, 404
