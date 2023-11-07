@@ -4,24 +4,14 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity,
   StyleSheet,
   Switch,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { ServerUrl } from "./Logics/BaseUrl";
-import TrelloSubscribe from "./Logics/Subcrpibe_trello";
-import axios from "axios";
 
 export default function AreaCard({ image1, image2, description, token }) {
   const [isEnabled, setIsEnabled] = useState(false);
-  const [isgood, setIsGood] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-  const navigation = useNavigation();
 
-  if (isgood) {
-    navigation.navigate("Create", { token: token });
-  }
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   return (
     <View style={styles.cardContainer}>
@@ -30,12 +20,10 @@ export default function AreaCard({ image1, image2, description, token }) {
         <Image source={image2} style={styles.image} />
       </View>
       <Text style={styles.description}>{description}</Text>
-      <TouchableOpacity style={styles.customButton} onPress={setIsGood}>
-        <Text style={styles.buttonText}>Try it</Text>
-      </TouchableOpacity>
       <Switch
         trackColor={{ false: COLORS.dark, true: COLORS.neutral }}
         thumbColor={isEnabled ? COLORS.primary : COLORS.dark}
+        ios_backgroundColor={COLORS.dark}
         onValueChange={toggleSwitch}
         value={isEnabled}
         style={styles.switch}
