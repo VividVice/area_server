@@ -41,6 +41,7 @@
     "@babel/plugin-transform-flow-strip-types": "^7.22.5",
     "@babel/preset-env": "^7.22.15",
     "@babel/preset-typescript": "^7.22.15",
+    "@react-native-community/checkbox": "^0.5.16",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-picker/picker": "2.4.10",
     "@react-native/metro-config": "^0.72.11",
