@@ -70,10 +70,12 @@ class Area_Control(Resource):
         token = request.headers.get('Authorization')
         payload = UnpackToken(token, True)
         parser = reqparse.RequestParser()
-        parser.add_argument('action_service_name', type=str, required=True)
-        parser.add_argument('action', type=str, required=True)
-        parser.add_argument('id', type=str, required=True)
+        parser.add_argument('action_service_name', type=str, required=False)
+        parser.add_argument('action', type=str, required=False)
+        parser.add_argument('id', type=str, required=False)
         args = parser.parse_args()
+        if not args["action_service_name"] or not args["action"] or not args["id"]:
+            return {"message": "Missing arguments"}, 402
         id = int(args["id"])
         if payload:
             user = DB.GetUser(payload["username"])
