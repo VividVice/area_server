@@ -44,7 +44,6 @@ def Setup(User:UserModel, type:str, params = None) -> None:
     post_webhook(User, webhook_data)
 
 def DeleteAll(User:UserModel) -> None:
-    user_id =  get_user_id(User)
     webhooks = get_webhooks_for_user(User)
     for webhook in webhooks:
         delete_webhook(User, webhook['id'])
