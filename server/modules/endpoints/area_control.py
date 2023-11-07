@@ -7,7 +7,7 @@ from sys import stderr
 app = Config().GetApp()
 
 class Area_Control(Resource):
-    def get():
+    def get(self):
         # Get the username from the request parameters or headers, depending on your use case
         token = request.headers.get('Authorization')
         payload = UnpackToken(token, True)
