@@ -14,7 +14,8 @@
         this.$router.push('/');
       },
       downloadMobileVersion() {
-        fetch('http://51.20.192.77:80/client.apk', { // Changed to match the server's endpoint
+        console.log('Downloading mobile version...');
+        fetch('http://51.20.192.77:80/client.apk', {
           method: 'GET'
         })
         .then(response => response.blob())
@@ -23,11 +24,11 @@
           const a = document.createElement('a');
           a.style.display = 'none';
           a.href = url;
-          a.download = 'AreaCraft.apk'; // You might want to change this to 'w.apk' to reflect the server's file name
+          a.download = 'AreaCraft.apk';
           document.body.appendChild(a);
           a.click();
           window.URL.revokeObjectURL(url);
-          document.body.removeChild(a); // It's a good practice to clean up and remove the element after the download has started
+          document.body.removeChild(a);
         })
         .catch((error) => {
           console.error('Error:', error);

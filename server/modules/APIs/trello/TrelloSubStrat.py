@@ -6,7 +6,6 @@ from modules.APIs.trello.OauthTrello import TrelloAuth
 # from OauthTrello import TrelloAuth
 from modules.database.DB import DataBaseOpps as DB
 from modules.APIs.service_supcription.StrategySubcrpition import SubscriptionStrategy, UnSubscriptionStrategy
-# from modules.APIs.trello.TrelloWebhook import Delete
 
 class TrelloSubStrat(SubscriptionStrategy):
     def execute(self, user:UserModel, service_args: dict):
@@ -21,8 +20,9 @@ class TrelloSubStrat(SubscriptionStrategy):
 
 class TrelloUnSubStrat(UnSubscriptionStrategy):
     def execute(self, user:UserModel, service_args: dict):
+        from modules.APIs.trello.TrelloWebhook import DeleteAll
         if user.user_services["trello"] == None or user.user_services["trello"] == False:
             return {"message": "Not sub to service."}, 400
-        # Delete(user)
+        DeleteAll(user)
         DB.UnSubcripeToService(user, "trello")
         return {"message": "Service removed successfully."}, 200

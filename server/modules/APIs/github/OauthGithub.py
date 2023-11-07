@@ -21,7 +21,7 @@ class GithubAuth():
         self.Auth_url = "https://github.com/login/oauth/authorize"
         self.Access_token_url = "https://github.com/login/oauth/access_token"
         # the scope has to have access to the username and be able to create, read, update, and delete repos
-        self.scope = "user repo" # basically all the permissions
+        self.scope = "user+repo"
         self.client_id = getenv('GITHUB_CLIENT_ID')
         self.client_secret = getenv('GITHUB_CLIENT_SECRET')
 

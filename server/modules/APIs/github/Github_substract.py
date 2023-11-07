@@ -5,7 +5,6 @@ from modules.APIs.github.OauthGithub import GithubAuth
 # from OauthTrello import TrelloAuth
 from modules.database.DB import DataBaseOpps as DB
 from modules.APIs.service_supcription.StrategySubcrpition import SubscriptionStrategy, UnSubscriptionStrategy
-# from modules.APIs.trello.TrelloWebhook import Delete
 
 class GithubSubStrat(SubscriptionStrategy):
     def execute(self, user:UserModel, service_args: dict):
