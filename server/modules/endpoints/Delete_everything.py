@@ -21,5 +21,5 @@ class END(Resource):
                 try:
                     delete_methods[service]["all"](user)
                 except:
-                    print(f"failed to delete {service} for user {user.username}")
+                    continue
         return {"message": "everything deleted"}, 200
