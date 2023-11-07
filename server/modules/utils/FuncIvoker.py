@@ -5,6 +5,7 @@ from modules.APIs.callr.Callr_actions import *
 from modules.APIs.chatgpt.ChatGPT_actions import *
 from modules.APIs.timer.time_action import *
 from modules.APIs.weather.weather_Action import *
+from modules.APIs.nasa.nasa_action import *
 
 # using a name of fuction given as a string call it and pass the params to it (if any) you must unpack the params first, params are
 # given as args to the function so use kwargs(the equviant to args_list in C) to unpack them
@@ -45,7 +46,10 @@ list_of_reactions = {
     ],
     "weather" : [
         {"get_current_weather": get_current_weather}
-    ]
+    ],
+    "nasa" : [
+        {"get_photo": get_photo}
+    ],
 }
 
 def FuncInvoker(service_name, func_name, user, **kwargs):

@@ -7,6 +7,7 @@ from modules.APIs.callr.Callr_Webhook import Setup as callr_setup
 from modules.APIs.chatgpt.AREA_list_ChatGPT import reactions_list as chatgpt_re
 from modules.APIs.timer.AREA_list_Timer import reactions_list as time_re
 from modules.APIs.weather.AREA_list_Weather import reactions_list as weather_re
+from modules.APIs.nasa.AREA_list_Nasa import reactions_list as nasa_re
 
 action_list = {
     "trello": trello_ac,
@@ -24,6 +25,7 @@ reaction_list = {
     "chatgpt": chatgpt_re,
     "time": time_re,
     "weather": weather_re,
+    "nasa": nasa_re,
 }
 
 """

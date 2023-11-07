@@ -370,6 +370,15 @@ export default function CreateComponent() {
       }
     }
 
+
+    if (selectedApp2 === "Nasa") {
+      if (selectedItemApp2 === "Get Photo") {
+        body.reaction_params = {
+          target: Option1app2,
+        };
+      }
+    }
+
     console.log(body);
     try {
       const response = await fetch(`${ServerUrl()}/create_AREA`, {
@@ -424,7 +433,7 @@ export default function CreateComponent() {
           <Picker.Item label="Trello" value="Trello" />
           <Picker.Item label="ChatGPT" value="ChatGPT" />
           <Picker.Item label="Callr" value="Callr" />
-          {/* <Picker.Item label="GitHub" value="GitHub" /> */}
+          <Picker.Item label="Nasa" value="Nasa" />
           <Picker.Item label="Time" value="Time" />
           <Picker.Item label="Weather" value="Weather" />
         </Picker>
@@ -709,6 +718,19 @@ export default function CreateComponent() {
                       }
                     >
                       <Picker.Item label="Get current weather" value="Get current weather" />
+                    </Picker>
+                  </>
+                )}
+                {selectedApp2 === "Nasa" && (
+                  <>
+                    <Picker
+                      style={styles.picker}
+                      selectedValue={selectedItemApp2}
+                      onValueChange={(itemValue) =>
+                        setSelectedItemApp2(itemValue)
+                      }
+                    >
+                      <Picker.Item label="Get Photo" value="Get Photo" />
                     </Picker>
                   </>
                 )}
@@ -1105,6 +1127,17 @@ export default function CreateComponent() {
                           placeholderTextColor="#909090"
                           value={Option2app2}
                           onChangeText={setOption2app2}
+                        />
+                      </View>
+                    )}
+                    {selectedItemApp2 === "Get Photo" && (
+                      <View style={styles.inputTextCallr}>
+                        <TextInput
+                          style={styles.input}
+                          placeholder="Target number (ex: +33612345678)"
+                          placeholderTextColor="#909090"
+                          value={Option1app2}
+                          onChangeText={setOption1app2}
                         />
                       </View>
                     )}
