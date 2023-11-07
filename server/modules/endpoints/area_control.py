@@ -34,7 +34,7 @@ class Area_Control(Resource):
                             })
                 print("return_data type", type(return_data), file=stderr)
                 print(return_data, file=stderr)
-                return jsonify(return_data), 200
+                return return_data, 200
             else:
                 return jsonify({"error": "User not found"}), 404
         else:
