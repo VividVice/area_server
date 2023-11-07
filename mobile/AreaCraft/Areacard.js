@@ -9,7 +9,7 @@ import {
 } from "react-native";
 
 export default function AreaCard({ image1, image2, description, token }) {
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
 
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
