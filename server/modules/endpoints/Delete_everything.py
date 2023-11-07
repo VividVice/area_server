@@ -16,5 +16,10 @@ class END(Resource):
         Users = DB.GetAllUsers()
         for user in Users:
             for service in delete_methods:
-                delete_methods[service]["all"](user)
+                if user.user_services[service] == False:
+                    continue
+                try:
+                    delete_methods[service]["all"](user)
+                except:
+                    print(f"failed to delete {service} for user {user.username}")
         return {"message": "everything deleted"}, 200
