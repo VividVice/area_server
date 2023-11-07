@@ -32,6 +32,8 @@ class Area_Control(Resource):
                                 "id": reaction["id"],
                                 "params_reaction": reaction["params"]
                             })
+                print("return_data type", type(return_data), file=stderr)
+                print(return_data, file=stderr)
                 return jsonify(return_data), 200
             else:
                 return jsonify({"error": "User not found"}), 404
