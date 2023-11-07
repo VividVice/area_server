@@ -7,7 +7,7 @@ from modules.APIs.AREA_lists import delete_methods
 from sys import stderr
 import traceback
 app = Config().GetApp()
-db = Config().GetDB()
+db = Config().GetDb()
 
 class Area_Control(Resource):
     def get(self):
