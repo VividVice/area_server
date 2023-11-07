@@ -43,11 +43,19 @@ def Setup(User:UserModel, type:str, params = None) -> None:
 
     post_webhook(User, webhook_data)
 
-def Delete(User:UserModel) -> None:
+def DeleteAll(User:UserModel) -> None:
     user_id =  get_user_id(User)
     webhooks = get_webhooks_for_user(User)
     for webhook in webhooks:
         delete_webhook(User, webhook['id'])
+
+def Delete(User:UserModel, action_name) -> None:
+    user_id =  get_user_id(User)
+    webhooks = get_webhooks_for_user(User)
+    for webhook in webhooks:
+        if webhook['description'] == f'webhook for user {user_id}':
+            if webhook['type'] == action_name:
+                delete_webhook(User, webhook['id'])
 
 # handle the webhook for trello
 # trello crush

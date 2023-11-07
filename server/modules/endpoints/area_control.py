@@ -3,6 +3,7 @@ from flask_restful import Resource, reqparse
 from modules.database.DB import DataBaseOpps as DB
 from modules.config.config import Config
 from modules.utils.jsonToken import UnpackToken
+from modules.APIs.AREA_lists import delete_methods
 from sys import stderr
 app = Config().GetApp()
 
@@ -58,6 +59,7 @@ class Area_Control(Resource):
                             # check if is it is the last reaction if so execute delete webhook
                             if len(area["subbed_reactions"]) == 0:
                                 # delete webhook
+                                delete_methods[args["action_service_name"]]["singular"](user, args["action"])
                                 # delete the action as well
                                 user.user_services[args["action_service_name"]]["Areas"].remove(area)
                             DB.Commit()
