@@ -16,7 +16,7 @@ class GitHubOauthAuthorization(Resource):
         parser.add_argument('return_url', type=str, required=True)
         args = parser.parse_args()
         auth_url = GithubAuth().get_authorize_url("unknown",args['return_url'])
-        print(auth_url, sys.stderr)
+        print(auth_url, file=sys.stderr)
         return {'auth_url': auth_url}, 200
 
 class GitHubOauthAccess(Resource):
