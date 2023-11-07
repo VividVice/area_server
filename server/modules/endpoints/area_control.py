@@ -7,6 +7,7 @@ from modules.APIs.AREA_lists import delete_methods
 from sys import stderr
 import traceback
 app = Config().GetApp()
+db = Config().GetDB()
 
 class Area_Control(Resource):
     def get(self):
@@ -94,6 +95,7 @@ class Area_Control(Resource):
                             # for some reason the changes are not saved to the db
                             user.user_services[args["action_service_name"]]["Areas"] = user.user_services[args["action_service_name"]]["Areas"]
                             print("user_services", user.user_services, file=stderr)
+                            db.session.add(user)
                             DB.Commit()
                             return {"message": "Area deleted"}, 200
                     return {"message": "Area not found"}, 401
