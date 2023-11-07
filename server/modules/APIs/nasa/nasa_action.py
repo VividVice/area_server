@@ -13,7 +13,7 @@ def get_photo(user: UserModel, target):
         image_url = data.get('url')
         api = callr.Api(getenv("CALLR_LOGIN"), getenv("CALLR_PASSWORD"))
         sender = "AREACRAFT"
-        api.call('sms.send', sender, target, image_url, None)
+        api.call('sms.send', sender, target, "Here is the nasa image of the day:" + image_url, None)
         return {"message": "success"}, 200
 
     else:
