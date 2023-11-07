@@ -10,7 +10,7 @@ from modules.APIs.trello.TrelloWebhook import WebHookTrello, get_endpoint as tre
 from modules.endpoints.reaction_sub import Area_Sub
 from modules.APIs.callr import Callr_Webhook
 import apk_build
-import get_areas
+from server.modules.endpoints.area_control  import Area_Control
 from modules.APIs.callr.Callr_Webhook import  WebHookCallr, get_endpoint as callr_endpoint
 # from apscheduler.schedulers.background import BackgroundScheduler
 # from trello import Trello, ChatGPT
@@ -32,4 +32,5 @@ if __name__ == '__main__':
     config.AddResource(Area_Sub, '/create_AREA')
     config.AddResource(WebHookTrello, f'/{trello_endpoint()}/')
     config.AddResource(WebHookCallr, f'/{callr_endpoint()}/')
+    config.AddResource(Area_Control, '/Area_control')
     config.Run()
