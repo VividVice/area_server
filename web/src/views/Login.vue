@@ -16,7 +16,8 @@
       <input type="password" v-model="password" placeholder="Password">
     </div>
     <div class="message">{{ message }}</div>
-    <div class="align-right">
+    <div class="rememberMe">
+      <input type="checkbox" v-model="rememberMe"> Remember me
       <button class="create-account-button" @click="register">Create account</button>
     </div>
     <div>
@@ -32,6 +33,7 @@ export default {
       username: '',
       password: '',
       message: '',
+      rememberMe: false,
     };
   },
   methods: {
@@ -48,6 +50,7 @@ export default {
           body: JSON.stringify({
             username: this.username,
             password: this.password,
+            rememberMe: this.rememberMe,
           }),
         })
           .then((response) => {
@@ -162,6 +165,14 @@ export default {
   font-family: 'LeagueSpartan', serif;
   cursor: pointer;
   font-size: 14px;
+}
+
+.rememberMe {
+  margin-bottom: 15px;
+  font-family: 'Quicksand_Light', serif;
+  margin-left: 30%;
+  margin-right: 30%;
+  font-size: 16px;
 }
 
 button {

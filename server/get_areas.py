@@ -19,11 +19,18 @@ def get_subscribed_areas():
             # also for each reaction subbed for each action add an id that corresponds to the index of the reaction in the subbed_reactions array
             return_data = []
             for service_name in user.user_services:
+                if user.user_services[service_name] == False:
+                    continue
                 for area in user.user_services[service_name]["Areas"]:
-                    area["service_name"] = service_name
-                    for i in range(len(area["subbed_reactions"])):
-                        area["subbed_reactions"][i]["id"] = i
-                    return_data.append(area)
+                    for reaction in area["subbed_reactions"]:
+                        return_data.append({
+                            "action_service_name": service_name,
+                            "action": area["action"],
+                            "reaction_name": reaction["reaction_name"],
+                            "reaction_service_name": reaction["service_name"],
+                            "id": reaction["id"],
+                            "params_reaction": reaction["params"]
+                        })
             return jsonify(return_data), 200
         else:
             return jsonify({"error": "User not found"}), 404
