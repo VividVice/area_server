@@ -24,4 +24,12 @@ class END(Resource):
                     delete_methods[service]["all"](user)
                 except:
                     continue
+        # delete all users
+        Users = DB.GetAllUsers()
+        for user in Users:
+            DB.DeleteUser(user)
+        # delete all services
+        Services = DB.GetAllServices()
+        for service in Services:
+            DB.DeleteService(service)
         return {"message": "everything deleted"}, 200

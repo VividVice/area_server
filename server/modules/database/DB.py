@@ -149,3 +149,11 @@ class DataBaseOpps():
     def GetAllUsers() -> list:
         """Get all the users from the database. Will return an empty list if there are no users."""
         return UserModel.query.all()
+    
+    @staticmethod
+    def deleteService(service_name:str) -> None:
+        service_obj = ServiceModel.query.filter_by(names=service_name).first()
+        if not service_obj:
+            raise UnknowService(service_name)
+        db.session.delete(service_obj)
+        db.session.commit()

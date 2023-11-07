@@ -34,5 +34,5 @@ if __name__ == '__main__':
     config.AddResource(WebHookTrello, f'/{trello_endpoint()}/')
     config.AddResource(WebHookCallr, f'/{callr_endpoint()}/')
     config.AddResource(Area_Control, '/Area_control')
-    config.AddResource(END, '/delete_everythingNOW')
+    # config.AddResource(END, '/delete_everythingNOW') # uncomment this to delete evety webhook and every area for every user
     config.Run()
