@@ -6,7 +6,7 @@ from modules.utils.jsonToken import UnpackToken
 from modules.APIs.AREA_lists import delete_methods
 
 app = Config().GetApp()
-db = Config().GetDB()
+db = Config().GetDb()
 
 class END(Resource):
     def get(self):
