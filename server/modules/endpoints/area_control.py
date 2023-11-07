@@ -56,8 +56,10 @@ class Area_Control(Resource):
                             # check if is it is the last reaction if so execute delete webhook
                             if len(area["subbed_reactions"]) == 0:
                                 # delete webhook
-                                pass
+                                # delete the action as well
+                                user.user_services[args["action_service_name"]]["Areas"].remove(area)
                             DB.Commit()
+                            print("user_services", user.user_services, file=stderr)
                             return {"message": "Area deleted"}, 200
                     return {"message": "Area not found"}, 401
                 except KeyError:
