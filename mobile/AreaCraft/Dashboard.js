@@ -100,7 +100,7 @@ export default function DashboardComponent() {
           key={`${area.id}_${index}`}
           image1={checkImage(area.action_service_name)}
           image2={checkImage(area.reaction_service_name)}
-          description={`${area.action_service_name} in ${area.reaction_service_name} when ${area.action} then ${area.reaction_name}`}
+          description={`${area.action_service_name} in ${area.reaction_service_name} when ${area.action} do ${area.reaction_name}`}
           token={token}
         />
       ))}
