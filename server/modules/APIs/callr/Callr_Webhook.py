@@ -5,7 +5,7 @@ path.append('../')
 from flask import request
 from flask_restful import Resource
 from modules.database.DB import DataBaseOpps as DB, UserModel
-from modules.APIs.callr.Callr_actions import create_webhook
+from modules.APIs.callr.Callr_actions import create_webhook, delete_webhook, get_webhooks
 from modules.utils.FuncIvoker import FuncInvoker
 from modules.utils.getServerIp import get_server_ip
 from modules.utils.error_classes import FailedExecution
@@ -29,12 +29,18 @@ def Setup(User:UserModel, type:str, params = None) -> None:
     print("the setup function gets called", file=stderr)
     create_webhook(User, type, f'http://{get_server_ip()}/{get_endpoint()}/?user_name={User.username}', params)
 
-def Delete(User:UserModel) -> None:
-    pass
-    # user_id =  get_user_id(User)
-    # webhooks = get_webhooks_for_user(User)
-    # for webhook in webhooks:
-    #     delete_webhook(User, webhook['id'])
+def DeleteAll(User:UserModel) -> None:
+    webhooks = get_webhooks(User)
+    for webhook in webhooks:
+        delete_webhook(User, webhook['id'])
+
+def Delete(User:UserModel, action_name) -> None:
+    webhooks = get_webhooks(User)
+    for webhook in webhooks:
+        if webhook['description'] == f'webhook for callr user':
+            if webhook['type'] == action_name:
+                delete_webhook(User, webhook['id'])
+
 
 # handle the webhook for callr
 # callr crush

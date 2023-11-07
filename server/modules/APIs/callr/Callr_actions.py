@@ -1,5 +1,5 @@
 from os import getenv
-from sys import path
+from sys import path, stderr
 import callr
 path.append('../..')
 from modules.database.DB import UserModel
@@ -11,12 +11,35 @@ def create_webhook(user:UserModel, type, endpoint, options):
         user_services = user.user_services["callr"]
         api_login = user_services["username"]
         api_password = user_services["password"]
-        print(api_login, api_password)
         api = callr.Api(api_login, api_password)
         result = api.call('webhooks.subscribe', type, endpoint, options)
-        print(result)
     except Exception as e:
         print(e)
+        return {"message": "anErrorOccured"}, 500
+
+def get_webhooks(user:UserModel):
+    try:
+        user_services = user.user_services["callr"]
+        api_login = user_services["username"]
+        api_password = user_services["password"]
+        api = callr.Api(api_login, api_password)
+        result = api.call('webhooks.get_list')
+        return result
+    except Exception as e:
+        print(e)
+        return None
+
+def delete_webhook(user:UserModel, id):
+    try:
+        user_services = user.user_services["callr"]
+        api_login = user_services["username"]
+        api_password = user_services["password"]
+        print(api_login, api_password, file=stderr)
+        api = callr.Api(api_login, api_password)
+        result = api.call('webhooks.unsubscribe', id)
+        print(result, file=stderr)
+    except Exception as e:
+        print(e, file=stderr)
         return {"message": "anErrorOccured"}, 500
 
 # Reactions

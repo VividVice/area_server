@@ -2,8 +2,8 @@ import sys
 sys.path.append('../../')
 from modules.APIs.trello.Area_list_Trello import action_list as trello_ac, reactions_list as trello_re
 from modules.APIs.callr.AREA_list_Callr import action_list as callr_ac, reactions_list as callr_re
-from modules.APIs.trello.TrelloWebhook import Setup as trello_setup
-from modules.APIs.callr.Callr_Webhook import Setup as callr_setup
+from modules.APIs.trello.TrelloWebhook import Setup as trello_setup, DeleteAll as trello_deleteall, Delete as trello_delete
+from modules.APIs.callr.Callr_Webhook import Setup as callr_setup, DeleteAll as callr_deleteall, Delete as callr_delete
 from modules.APIs.chatgpt.AREA_list_ChatGPT import reactions_list as chatgpt_re
 from modules.APIs.timer.AREA_list_Timer import reactions_list as time_re
 from modules.APIs.weather.AREA_list_Weather import reactions_list as weather_re
@@ -17,6 +17,11 @@ action_list = {
 setup_methods = {
     "trello": trello_setup,
     "callr": callr_setup,
+}
+
+delete_methods = {
+    "trello": {"singular": trello_delete, "all": trello_deleteall},
+    "callr": {"singular": callr_delete, "all": callr_deleteall},
 }
 
 reaction_list = {

@@ -68,7 +68,7 @@ export default function LoginComponent() {
       <View style={styles.container}>
         <Image
           source={require('../assets/icons/logo.png')}
-          style={{ width: 168, height: 168, marginTop: -100, marginBottom: 30 }}
+          style={{ width: 168, height: 168, marginTop: -100, marginBottom: 30, marginTop: 20 }}
         />
         <View>
           <Text style={styles.appName}>AreaCraft.</Text>
