@@ -52,6 +52,8 @@ def DeleteAll(User:UserModel) -> None:
 def Delete(User:UserModel, action_name) -> None:
     user_id =  get_user_id(User)
     webhooks = get_webhooks_for_user(User)
+    if webhooks == None:
+        return
     for webhook in webhooks:
         if webhook['description'] == f'webhook for user {user_id}':
             if webhook['type'] == action_name:

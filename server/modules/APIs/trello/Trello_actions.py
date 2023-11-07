@@ -208,7 +208,7 @@ def delete_member(user:UserModel, board_name, email):
 def get_webhooks_for_user(user:UserModel):
     url = f"https://api.trello.com/1/tokens/{user.user_services['trello']['access_token']}/webhooks/?key={getenv('API_TRELLO')}"
     response = get(url, headers= create_auth_header(user))
-    return response.status_code == 200
+    return response.json() if response.status_code == 200 else None
 
 def delete_webhook(user:UserModel, webhook_id):
     url = f"https://api.trello.com/1/webhooks/{webhook_id}"
