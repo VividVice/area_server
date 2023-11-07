@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, ScrollView, ActivityIndicator, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import COLORS from '../assets/colors';
 import useDashboardLogic from './Logics/useDashboardLogic';
 import AreaCard from './Areacard';
+import { ServerUrl } from './Logics/BaseUrl';
 
 export default function DashboardComponent() {
   const route = useRoute();
   const token = route.params.token;
   const navigation = useNavigation();
+  const [areas, setAreas] = useState([]);
+  const [serviceDetails, setServiceDetails] = useState({
+    actions: [],
+    reactions: [],
+    actionNames: [],
+    reactionNames: [],
+  });
+
 
   const {
     filteredData,
@@ -21,7 +30,6 @@ export default function DashboardComponent() {
     NavigateCreate,
   } = useDashboardLogic(token);
 
-
   if (errorMessage) {
     return (
       <View style={styles.errorContainer}>
@@ -30,11 +38,56 @@ export default function DashboardComponent() {
     );
   }
 
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(`${ServerUrl()}/Area_control`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      const actionServiceNames = data.map(area => area.action_service_name);
+      const reactionServiceNames = data.map(area => area.reaction_service_name);
+      const actionNames = data.map(area => area.action);
+      const reactionNames = data.map(area => area.reaction_name);
+
+      console.log("dataaaaaaaaaaaaaaaa:", data);
+      setServiceDetails({
+        actions: actionServiceNames,
+        reactions: reactionServiceNames,
+        actionNames: actionNames,
+        reactionNames: reactionNames,
+      });
+      setAreas(data);
+    }
+    fetchData();
+  }, [token]);
+
+  function checkImage(name) {
+    if (name === "trello") {
+      return require('../assets/icons/trello.png');
+    } else if (name === "callr") {
+      return require('../assets/icons/callr.png');
+    } else if (name === "nasa") {
+      return require('../assets/icons/nasa.png');
+    } else if (name === "weather") {
+      return require('../assets/icons/weather.png');
+    } else if (name === "chatgpt") {
+      return require('../assets/icons/chatgpt.png');
+    } else if (name === "time") {
+      return require('../assets/icons/time.png');
+    } else {
+      return null;
+    }
+  }
+
   return (
     <ScrollView style={styles.background} onScroll={handleScroll} scrollEventThrottle={400}>
       <Image
           source={require('../assets/icons/logo.png')}
-          style={{ width: 100, height: 100, marginTop: 0, alignSelf: 'center', marginBottom: 1 }}
+          style={{ width: 100, height: 100, marginTop: 0, alignSelf: 'center', marginBottom: 1, marginTop: 50 }}
       />
       <Text style={styles.appName}>Dashboard</Text>
       <Text style={styles.text}>Connect your apps together</Text>
@@ -42,13 +95,15 @@ export default function DashboardComponent() {
         <Text style={styles.buttonText}>Add new area</Text>
       </TouchableOpacity>
       <Text style={styles.Textmiddle}>Your areas</Text>
-      <Text style={styles.Textmiddle}>Recommended areas</Text>
-      <AreaCard
-        image1={require('../assets/icons/trello.png')}
-        image2={require('../assets/icons/trello.png')}
-        description="Create card when new list is created"
-        token={token}
-      />
+      {areas.map((area, index) => (
+        <AreaCard
+          key={`${area.id}_${index}`}
+          image1={checkImage(area.action_service_name)}
+          image2={checkImage(area.reaction_service_name)}
+          description={`${area.action_service_name} in ${area.reaction_service_name} when ${area.action} then ${area.reaction_name}`}
+          token={token}
+        />
+      ))}
       <View style={styles.container}>
         {isLoading && (
         <View style={styles.bottomLoaderContainer}>

@@ -320,6 +320,16 @@ export default function CreateComponent() {
           msg: Option2app2,
         };
       }
+      if (selectedItemApp2 === "Get list of medias") {
+        body.reaction_params = {
+          target: Option1app2,
+        };
+      }
+      if (selectedItemApp2 === "Get quota status") {
+        body.reaction_params = {
+          target: Option1app2,
+        };
+      }
     }
 
 
@@ -380,29 +390,32 @@ export default function CreateComponent() {
     }
 
     console.log(body);
-    try {
-      const response = await fetch(`${ServerUrl()}/create_AREA`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(body),
-      });
-      const data = await response.json();
-      console.log(data);
-      alert(
-        "Created Area " +
-          selectedApp1 +
-          " with " +
-          selectedApp2 +
-          " when " +
-          selectedItemApp1 +
-          " do " +
-          selectedItemApp2
-      );
-    } catch (error) {
-      console.error("Error:", error);
+    if (selectedApp1 && selectedApp2 && selectedItemApp1 && selectedItemApp2) {
+      try {
+        const response = await fetch(`${ServerUrl()}/create_AREA`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(body),
+        });
+        const data = await response.json();
+        console.log(data);
+        alert(
+          "Created Area " +
+            selectedApp1 +
+            " with " +
+            selectedApp2 +
+            " when " +
+            selectedItemApp1 +
+            " do " +
+            selectedItemApp2
+        );
+        navigation.navigate("Dashboard", { token: token });
+      } catch (error) {
+        console.error("Error:", error);
+      }
     }
   }
 
@@ -1127,6 +1140,28 @@ export default function CreateComponent() {
                           placeholderTextColor="#909090"
                           value={Option2app2}
                           onChangeText={setOption2app2}
+                        />
+                      </View>
+                    )}
+                    {selectedItemApp2 === "Get list of medias" && (
+                      <View style={styles.inputTextCallr}>
+                        <TextInput
+                          style={styles.input}
+                          placeholder="Target number (ex: +33612345678)"
+                          placeholderTextColor="#909090"
+                          value={Option1app2}
+                          onChangeText={setOption1app2}
+                        />
+                      </View>
+                    )}
+                    {selectedItemApp2 === "Get quota status" && (
+                      <View style={styles.inputTextCallr}>
+                        <TextInput
+                          style={styles.input}
+                          placeholder="Target number (ex: +33612345678)"
+                          placeholderTextColor="#909090"
+                          value={Option1app2}
+                          onChangeText={setOption1app2}
                         />
                       </View>
                     )}
