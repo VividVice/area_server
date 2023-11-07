@@ -144,3 +144,8 @@ class DataBaseOpps():
     def Commit() -> None:
         """Commit the changes to the database."""
         db.session.commit()
+
+    @staticmethod
+    def GetAllUsers() -> list:
+        """Get all the users from the database. Will return an empty list if there are no users."""
+        return UserModel.query.all()
