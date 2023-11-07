@@ -36,9 +36,9 @@ class Area_Control(Resource):
                 print(return_data, file=stderr)
                 return return_data, 200
             else:
-                return jsonify({"error": "User not found"}), 404
+                {"error": "User not found"}, 404
         else:
-            return jsonify({"error": "Username not provided"}), 403
+            {"error": "Username not provided"}, 403
 
     def post(self):
         token = request.headers.get('Authorization')
