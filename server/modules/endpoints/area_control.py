@@ -91,8 +91,10 @@ class Area_Control(Resource):
                                 # delete_methods[args["action_service_name"]]["singular"](user, args["action"])
                                 # delete the action as well
                                 user.user_services[args["action_service_name"]]["Areas"].remove(area)
-                            DB.Commit()
+                            # for some reason the changes are not saved to the db
+                            user.user_services[args["action_service_name"]]["Areas"] = user.user_services[args["action_service_name"]]["Areas"]
                             print("user_services", user.user_services, file=stderr)
+                            DB.Commit()
                             return {"message": "Area deleted"}, 200
                     return {"message": "Area not found"}, 401
                 except KeyError:
