@@ -794,6 +794,7 @@ export default {
           body: JSON.stringify(body)
         });
         const data = await response.json();
+        alert('Your AREA has been created');
         console.log(data);
       } catch (error) {
         console.error('Error:', error);

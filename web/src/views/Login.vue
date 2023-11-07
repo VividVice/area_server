@@ -42,15 +42,34 @@ export default {
       redirectUrl: null,
       isAuth: false,
       returnDestination: 'http://localhost:8081/dashboard',
+      githubToken: '',
+      code: '',
     };
   },
-  mounted() {
-    const test = new URLSearchParams('code');
-    console.log(test);
-    const code = this.getParameterByName('code');
-    if (code) {
-      this.fetchAccessToken(code);
+  async mounted() {
+    const current = document.URL;
+    const tokenAndState = current.split('code=')[1];
+    if (tokenAndState) {
+      this.code = tokenAndState.split('&')[0];
     }
+
+    if (this.code) {
+      this.fetchAccessToken(this.code);
+    }
+    // if (this.githubToken) {
+    //   const response = await axios.get(
+    //     `http://51.20.192.77:80/OauthGithub/access?code=${this.githubToken}`,
+    //     {
+    //       headers: {
+    //         Application: 'application/json',
+    //         Authorization: `Bearer ${this.token}`,
+    //       },
+    //     }
+    //   );
+    //   localStorage.setItem('user-token', response.data.token);
+    //   console.log('Token stored in session:', response.data.token);
+      
+    // }
   },
   methods: {
     getParameterByName(name, url = window.location.href) {
@@ -75,9 +94,6 @@ export default {
             'Content-Type': 'application/json',
           },
         });
-
-        const test = new URLSearchParams('code');
-        console.log(test);
         this.redirectUrl = response.data.auth_url;
         window.location.href = this.redirectUrl;
       } catch (error) {
@@ -95,6 +111,9 @@ export default {
         console.log('Token received:', response.data.token);
         this.setTokenSession(response.data.token);
         this.isAuth = true;
+        localStorage.setItem('user-token', response.data.token);
+        this.redirectUrl = "http://localhost:8081/dashboard";
+        window.location.href = this.redirectUrl;
       } catch (error) {
         console.error('Error fetching access token:', error);
       }
