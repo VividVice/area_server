@@ -197,15 +197,21 @@
           </div>
 
           <div v-else-if="selectedApp2 === 'Callr' && selectedReaction === 'Get List of Medias'">
-            <h2 class="nameOfParam">Media Name</h2>
-            <p v-if="showTargetInfoReaction">Insert the name of the media</p>
+            <h2 class="nameOfParam">Target</h2>
+            <p v-if="showTargetInfoReaction">Insert the target phone number (ex: +33612345678)</p>
             <div class="input-container2">
               <button class="infoBtn" @click="showTargetInfoReaction = !showTargetInfoReaction">i</button>
-              <input v-model="Option1app2" type="text" placeholder="Media name">
+              <input v-model="Option1app2" type="text" placeholder="Target">
             </div>
           </div>
 
           <div v-else-if="selectedApp2 === 'Callr' && selectedReaction === 'Get Quota Status'">
+            <h2 class="nameOfParam">Target</h2>
+            <p v-if="showTargetInfoReaction">Insert the target phone number (ex: +33612345678)</p>
+            <div class="input-container2">
+              <button class="infoBtn" @click="showTargetInfoReaction = !showTargetInfoReaction">i</button>
+              <input v-model="Option1app2" type="text" placeholder="Target">
+            </div>
           </div>
 
           <div v-else-if="selectedApp2 === 'Trello' && selectedReaction === 'Create Board'">
@@ -672,10 +678,14 @@ export default {
           };
         }
         if (this.selectedReaction === 'Get List of Medias') {
-          reaction_p = {};
+          reaction_p = {
+            target: this.Option1app2,
+          };
         }
         if (this.selectedReaction === 'Get Quota Status') {
-          reaction_p = {};
+          reaction_p = {
+            target: this.Option1app2,
+          };
         }
       }
 

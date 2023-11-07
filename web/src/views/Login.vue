@@ -45,6 +45,8 @@ export default {
     };
   },
   mounted() {
+    const test = new URLSearchParams('code');
+    console.log(test);
     const code = this.getParameterByName('code');
     if (code) {
       this.fetchAccessToken(code);
@@ -74,6 +76,8 @@ export default {
           },
         });
 
+        const test = new URLSearchParams('code');
+        console.log(test);
         this.redirectUrl = response.data.auth_url;
         window.location.href = this.redirectUrl;
       } catch (error) {

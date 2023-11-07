@@ -84,13 +84,13 @@ reactions_list = [
         "name": "getListOfMedias",
 		"description": "Get list of medias",
         "function_name": "get_list_of_medias",
-		"params": {}
+		"params": {"target": str}
     },
     {
         "name": "getQuotaStatus",
 		"description": "Get quota status",
         "function_name": "get_quota_status",
-        "params": {}
+        "params": {"target": str}
     }
 ]
 
