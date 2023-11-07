@@ -12,6 +12,7 @@ from modules.APIs.callr import Callr_Webhook
 import apk_build
 from modules.endpoints.area_control  import Area_Control
 from modules.APIs.callr.Callr_Webhook import  WebHookCallr, get_endpoint as callr_endpoint
+from modules.endpoints.Delete_everything import END
 # from apscheduler.schedulers.background import BackgroundScheduler
 # from trello import Trello, ChatGPT
 
@@ -33,4 +34,5 @@ if __name__ == '__main__':
     config.AddResource(WebHookTrello, f'/{trello_endpoint()}/')
     config.AddResource(WebHookCallr, f'/{callr_endpoint()}/')
     config.AddResource(Area_Control, '/Area_control')
+    config.AddResource(END, '/delete_everythingNOW')
     config.Run()
