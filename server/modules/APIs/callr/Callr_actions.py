@@ -175,3 +175,23 @@ def get_quota_status(user:UserModel, target):
     except Exception as e:
         print(e)
         return {"message": "anErrorOccured"}, 500
+
+def get_serice_info():
+    return {
+        "name" : "callr",
+        "actions" : [
+            {"name" : "phone_call_recieved", "description" : "Phone call recieved"},
+            {"name" : "sms_recieved", "description" : "SMS recieved"},
+            {"name" : "media_created", "description" : "Media created"},
+            {"name" : "media_updated", "description" : "Media updated"},
+            {"name" : "quota_status_updated", "description" : "Quota status updated"}
+        ],
+        "reactions" : [
+            {"name" : "make_call", "description" : "Make a call"},
+            {"name" : "send_sms", "description" : "Send a sms"},
+            {"name" : "create_media", "description" : "Create a media"},
+            {"name" : "update_media_tts", "description" : "Update a media"},
+            {"name" : "get_list_of_medias", "description" : "Get a list of medias"},
+            {"name" : "get_quota_status", "description" : "Get the quota status"}
+        ]
+    }

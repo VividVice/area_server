@@ -15,6 +15,19 @@ def create_auth_header(user: UserModel):
     }
     return header
 
+def get_service_info():
+    return {
+        "name" : "chatgpt",
+        "actions" : [],
+        "reactions" : [
+            {"name" : "post_message", "description" : "Post a message to a phone number"},
+            {"name" : "post_message_sentiments", "description" : "Post a message to a phone number"},
+            {"name" : "post_message_categories", "description" : "Post a message to a phone number"},
+            {"name" : "post_message_summarize", "description" : "Post a message to a phone number"},
+            {"name" : "post_message_mail", "description" : "Post a message to a phone number"}
+        ]
+    }
+
 def post_message_sentiments(user: UserModel, target, message_content):
     url = "https://luna-aibot-demo-oai.openai.azure.com/openai/deployments/WidgetFaces/chat/completions?api-version=2023-07-01-preview"
     data = {

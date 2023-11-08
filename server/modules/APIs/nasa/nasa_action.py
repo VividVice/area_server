@@ -18,3 +18,10 @@ def get_photo(user: UserModel, target):
 
     else:
         return {"message": "anErrorOccured"}, 500
+
+def get_service_info():
+    return {
+        "name" : "nasa",
+        "actions" : [],
+        "reactions" : [{"name" : "get_photo", "description" : "Get the photo of the day from nasa and send it as a sms"}]
+    }

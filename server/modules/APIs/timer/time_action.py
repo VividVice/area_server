@@ -46,3 +46,10 @@ def get_current_time(user: UserModel, target, city):
     except Exception as e:
         print(f"Une erreur s'est produite : {e}")
         return {"message": "anErrorOccured"}, 500
+
+def get_service_info():
+    return {
+        "name" : "timer",
+        "actions" : [],
+        "reactions" : [{"name" : "get_current_time", "description" : "Get the current time of a city and send it as a sms"}]
+    }

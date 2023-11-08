@@ -56,3 +56,10 @@ def get_current_weather(user: UserModel, target, city):
         return {"message": "success"}, 200
     except Exception as e:
         return {"message": "anErrorOccured"}, 500
+
+def get_service_info():
+    return {
+        "name" : "weather",
+        "actions" : [],
+        "reactions" : [{"name" : "get_current_weather", "description" : "Get the current weather of a city and send it as a sms"}]
+    }
